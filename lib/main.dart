@@ -1,17 +1,29 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:iWash/sobre.dart';
 
+import 'cadastrar.dart';
+import 'esqueceSenha.dart';
 import 'lojas.dart';
 
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    initialRoute: '/lojas',
+    initialRoute: '/login',
     routes: {
       '/login': (context) => Login(),
+      '/esqueceSenha': (context) => EsqueceSenha(),
+      '/cadastrar': (context) => Cadastrar(),
       '/home': (context) => Home(),
       '/sobre': (context) => Sobre(),
-      '/lojas': (context) => Lojas(logoEmpresa: 'assets/images/Wash/wash1.jpg', nomeLoja: 'Loja Automotiva',avaliacao: '4.8 ', km: '3.3 km', tempoBusca: '2 hrs', precoBusca: '3,00'),
+      '/lojas': (context) => Lojas(
+          logoEmpresa: 'assets/images/Wash/wash1.jpg',
+          nomeLoja: 'Loja Automotiva',
+          avaliacao: '4.8 ',
+          km: '3.3 km',
+          tempoBusca: '2 hrs',
+          precoBusca: '3,00'),
     },
   ));
 }
@@ -30,11 +42,9 @@ class _LoginState extends State<Login> {
     return Scaffold(
       body: Center(
         child: Container(
-          constraints: BoxConstraints(maxWidth: 400),
+          constraints: BoxConstraints(maxWidth: 430),
           padding: EdgeInsets.all(40),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             SizedBox(
               width: 150,
               child: ClipRRect(
@@ -81,6 +91,23 @@ class _LoginState extends State<Login> {
               ),
             ),
             Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                width: double.infinity,
+                height: 33,
+                child: ElevatedButton.icon(
+                  label: Text('Esqueci a senha'),
+                  icon: Icon(Icons.password),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/esqueceSenha');
+                  },
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.red[500],
+                      textStyle: TextStyle(fontSize: 15)),
+                ),
+              ),
+            ),
+            Padding(
               padding: const EdgeInsets.all(12.0),
               child: SizedBox(
                 width: double.infinity,
@@ -97,6 +124,18 @@ class _LoginState extends State<Login> {
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: TextButton(
+                child: Text(
+                  "Cadastrar",
+                  textAlign: TextAlign.right,
+                ),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/cadastrar');
+                },
+              ),
+            ),
           ]),
         ),
       ),
@@ -105,12 +144,17 @@ class _LoginState extends State<Login> {
 }
 
 class Home extends StatefulWidget {
-
   List<Lojas> _listLojas = [];
 
-  Home(){
+  Home() {
     _listLojas = [];
-    _listLojas.add(Lojas(logoEmpresa: 'assets/images/Wash/wash1.jpg', nomeLoja: 'Loja Automotiva',avaliacao: '4.8 ', km: '3.3 km', tempoBusca: '2 hrs', precoBusca: '3,00'));
+    _listLojas.add(Lojas(
+        logoEmpresa: 'assets/images/Wash/wash1.jpg',
+        nomeLoja: 'Loja Automotiva',
+        avaliacao: '4.8 ',
+        km: '3.3 km',
+        tempoBusca: '2 hrs',
+        precoBusca: '3,00'));
   }
 
   @override
@@ -133,14 +177,12 @@ class _HomeState extends State<Home> {
                 color: Colors.blue,
               ),
               child: Container(
-                
                 child: Column(
                   children: <Widget>[
                     Material(
-                      borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                        borderRadius: BorderRadius.all(Radius.circular(50.0)),
                         child: Image.asset('assets/images/perfil.jpg',
-                            width: 100)
-                    ),
+                            width: 100)),
                   ],
                 ),
               ),
@@ -159,7 +201,7 @@ class _HomeState extends State<Home> {
             ),
             ListTile(
               leading: Icon(Icons.logout),
-              title: Text('Sair'),            
+              title: Text('Sair'),
             ),
           ],
         ),
@@ -269,13 +311,11 @@ class _HomeState extends State<Home> {
                     ],
                   ),
                 ),
-
               ],
             ),
           ),
         ),
       ),
-      
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -303,7 +343,6 @@ class _HomeState extends State<Home> {
     );
   }
 }
-
 
 class Perfil extends StatelessWidget {
   @override
