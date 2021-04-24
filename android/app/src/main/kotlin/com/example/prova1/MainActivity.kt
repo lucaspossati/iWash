@@ -1,4 +1,4 @@
-package com.example.prova1
+package com.example.iWash
 
 import io.flutter.embedding.android.FlutterActivity
 

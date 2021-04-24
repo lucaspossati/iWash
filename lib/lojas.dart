@@ -2,6 +2,24 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Lojas extends StatelessWidget {
+  final String logoEmpresa;
+  final String nomeLoja;
+  final String avaliacao;
+  final String km;
+  final String tempoBusca;
+  final String precoBusca;
+
+  const Lojas(
+      {Key key,
+      this.logoEmpresa,
+      this.nomeLoja,
+      this.avaliacao,
+      this.tempoBusca,
+      this.precoBusca,
+      this.km,
+      })
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -9,11 +27,17 @@ class Lojas extends StatelessWidget {
       children: <Widget>[
         Row(
           children: [
-            Container(
-              margin: EdgeInsets.only(bottom: 10),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.asset('assets/images/Wash/wash1.jpg'),
+            Padding(
+              padding: const EdgeInsets.only(top: 10.0, left: 15.0),
+              child: Container(
+                margin: EdgeInsets.only(bottom: 10),
+                child: SizedBox(
+                  width: 90,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.asset(logoEmpresa),
+                  ),
+                ),
               ),
             ),
             Column(
@@ -23,7 +47,7 @@ class Lojas extends StatelessWidget {
                   child: Row(
                     children: [
                       Text(
-                        'Title',
+                        nomeLoja,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 14,
@@ -38,16 +62,23 @@ class Lojas extends StatelessWidget {
                   child: Row(
                     children: [
                       Text(
-                        'Avaliação',
+                        avaliacao,
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
+                          fontSize: 12,
                           color: Colors.orange,
                         ),
                       ),
+                      Icon(
+                        Icons.star_rate,
+                        color: Colors.orange,
+                        size: 15,
+                      ),
                       Text(
-                        'km',
+                        ' ' + km,
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
+                          fontSize: 12,
                           color: Colors.black54,
                         ),
                       ),
@@ -59,16 +90,18 @@ class Lojas extends StatelessWidget {
                   child: Row(
                     children: [
                       Text(
-                        'tempo',
+                        tempoBusca,
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
+                          fontSize: 12,
                           color: Colors.black54,
                         ),
                       ),
                       Text(
-                        'Preço',
+                        '  R\$ ' + precoBusca,
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
+                          fontSize: 12,
                           color: Colors.black54,
                         ),
                       ),

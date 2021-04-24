@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:iWash/sobre.dart';
+
+import 'lojas.dart';
 
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    initialRoute: '/login',
+    initialRoute: '/lojas',
     routes: {
       '/login': (context) => Login(),
       '/home': (context) => Home(),
+      '/sobre': (context) => Sobre(),
+      '/lojas': (context) => Lojas(logoEmpresa: 'assets/images/Wash/wash1.jpg', nomeLoja: 'Loja Automotiva',avaliacao: '4.8 ', km: '3.3 km', tempoBusca: '2 hrs', precoBusca: '3,00'),
     },
   ));
 }
@@ -27,7 +32,9 @@ class _LoginState extends State<Login> {
         child: Container(
           constraints: BoxConstraints(maxWidth: 400),
           padding: EdgeInsets.all(40),
-          child: Column(children: [
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
             SizedBox(
               width: 150,
               child: ClipRRect(
@@ -97,7 +104,20 @@ class _LoginState extends State<Login> {
   }
 }
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
+
+  List<Lojas> _listLojas = [];
+
+  Home(){
+    _listLojas = [];
+    _listLojas.add(Lojas(logoEmpresa: 'assets/images/Wash/wash1.jpg', nomeLoja: 'Loja Automotiva',avaliacao: '4.8 ', km: '3.3 km', tempoBusca: '2 hrs', precoBusca: '3,00'));
+  }
+
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -113,28 +133,33 @@ class Home extends StatelessWidget {
                 color: Colors.blue,
               ),
               child: Container(
-                height: 150,
-                width: 150,
+                
                 child: Column(
                   children: <Widget>[
                     Material(
-                        child: new Image.asset('assets/images/perfil.png',
-                            width: 60)),
+                      borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                        child: Image.asset('assets/images/perfil.jpg',
+                            width: 100)
+                    ),
                   ],
                 ),
               ),
             ),
             ListTile(
               leading: Icon(Icons.message),
-              title: Text('Messages'),
+              title: Text('Chats'),
             ),
             ListTile(
               leading: Icon(Icons.account_circle),
-              title: Text('Profile'),
+              title: Text('Meus dados'),
             ),
             ListTile(
               leading: Icon(Icons.settings),
-              title: Text('Settings'),
+              title: Text('Configurações'),
+            ),
+            ListTile(
+              leading: Icon(Icons.logout),
+              title: Text('Sair'),            
             ),
           ],
         ),
@@ -244,11 +269,13 @@ class Home extends StatelessWidget {
                     ],
                   ),
                 ),
+
               ],
             ),
           ),
         ),
       ),
+      
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -276,6 +303,7 @@ class Home extends StatelessWidget {
     );
   }
 }
+
 
 class Perfil extends StatelessWidget {
   @override

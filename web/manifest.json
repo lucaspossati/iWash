@@ -1,6 +1,6 @@
 {
-    "name": "prova1",
-    "short_name": "prova1",
+    "name": "iWash",
+    "short_name": "iWash",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

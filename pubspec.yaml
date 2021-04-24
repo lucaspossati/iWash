@@ -1,4 +1,4 @@
-name: prova1
+name: iWash
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -61,7 +61,7 @@ flutter:
     - assets/images/Wash/wash4.jpg
     - assets/images/Wash/wash5.jpg
     - assets/images/Wash/wash6.jpg
-    - assets/images/perfil.png
+    - assets/images/perfil.jpg
 
 
 
