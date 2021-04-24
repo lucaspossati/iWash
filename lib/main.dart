@@ -37,8 +37,11 @@ class _LoginState extends State<Login> {
   var _txtLogin = TextEditingController();
   var _txtSenha = TextEditingController();
 
+  
   @override
   Widget build(BuildContext context) {
+    final Mensagem msg = ModalRoute.of(context).settings.arguments;
+
     return Scaffold(
       body: Center(
         child: Container(
@@ -128,20 +131,33 @@ class _LoginState extends State<Login> {
               padding: const EdgeInsets.all(12.0),
               child: TextButton(
                 child: Text(
-                  "Cadastrar",
+                  "Cadastrar-se",
                   textAlign: TextAlign.right,
+                  style: TextStyle(
+                      color: Colors.red[800],
+                      decoration: TextDecoration.underline),
                 ),
                 onPressed: () {
                   Navigator.pushNamed(context, '/cadastrar');
                 },
               ),
             ),
-          ]),
+          
+            //Error no such method error  invalid member on null 'primeiroNome'
+            // Text('Bem vindo', style:TextStyle(fontSize: 18, fontStyle: FontStyle.italic)),  
+            // Text( msg.primeiroNome!=null?msg.primeiroNome:'Usuário não fornecido', style:TextStyle(fontSize: 15)),  
+            // SizedBox(height: 20),
+          
+          ],
+          ),
+          
         ),
       ),
     );
   }
 }
+
+
 
 class Home extends StatefulWidget {
   List<Lojas> _listLojas = [];
@@ -164,6 +180,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
@@ -206,112 +223,122 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
-      body: Center(
-        child: Container(
-          color: Colors.white,
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 12,
-              vertical: 10,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  'BUSCAR EM',
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 16,
-                  ),
-                ),
-                Row(
-                  children: <Widget>[
-                    Text(
-                      'Av. Presidente Vargas, 716',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-                    Icon(
-                      Icons.keyboard_arrow_down,
-                      color: Colors.blue,
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 15.0),
-                  child: Text(
-                    'O ENDEREÇO DE ENTREGA É O MESMO DA BUSCA ',
+      body: SingleChildScrollView(
+        child: Center(
+          child: Container(
+            color: Colors.white,
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 12,
+                vertical: 10,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'BUSCAR EM',
                     style: TextStyle(
                       color: Colors.grey,
                       fontWeight: FontWeight.w700,
                       fontSize: 16,
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 15.0),
-                  child: Text(
-                    'ENTREGAR EM',
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-                Row(
-                  children: <Widget>[
-                    Text(
-                      'Av. Independência, 1115',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-                    Icon(
-                      Icons.keyboard_arrow_down,
-                      color: Colors.blue,
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    width: 500,
-                    child: ClipRRect(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Image.asset('assets/images/banner.png'),
-                      ),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
-                Container(
-                  color: Colors.white,
-                  margin: EdgeInsets.only(top: 18),
-                  padding: EdgeInsets.only(top: 18, left: 12),
-                  alignment: Alignment.topLeft,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Row(
                     children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.only(bottom: 10),
-                        child: Text(
-                          'Lojas',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 17),
+                      Text(
+                        'Av. Presidente Vargas, 716',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
                         ),
+                      ),
+                      Icon(
+                        Icons.keyboard_arrow_down,
+                        color: Colors.blue,
                       ),
                     ],
                   ),
-                ),
-              ],
+                  Padding(
+                    padding: const EdgeInsets.only(top: 15.0),
+                    child: Text(
+                      'O ENDEREÇO DE ENTREGA É O MESMO DA BUSCA ',
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 15.0),
+                    child: Text(
+                      'ENTREGAR EM',
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        'Av. Independência, 1115',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                      Icon(
+                        Icons.keyboard_arrow_down,
+                        color: Colors.blue,
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SizedBox(
+                      width: 500,
+                      child: ClipRRect(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Image.asset('assets/images/banner.png'),
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    color: Colors.white,
+                    margin: EdgeInsets.only(top: 18),
+                    padding: EdgeInsets.only(top: 18, left: 12),
+                    alignment: Alignment.topLeft,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.only(bottom: 10),
+                          child: Text(
+                            'Lojas',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 17),
+                          ),
+                          // Lojas(
+                          //   logoEmpresa: 'assets/images/Wash/wash1.jpg',
+                          //   nomeLoja: 'Loja Automotiva',
+                          //   avaliacao: '4.8 ',
+                          //   km: '3.3 km',
+                          //   tempoBusca: '2 hrs',
+                          //   precoBusca: '3,00'),
+                        ),
+                      ],
+                    ),
+                  ),
+                  
+                ],
+              ),
             ),
           ),
         ),

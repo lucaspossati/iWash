@@ -1,7 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Cadastrar extends StatelessWidget {
+class Cadastrar extends StatefulWidget {
+  @override
+  _CadastrarState createState() => _CadastrarState();
+}
+
+class _CadastrarState extends State<Cadastrar> {
+  var _primeiroNome = TextEditingController();
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,8 +29,14 @@ class Cadastrar extends StatelessWidget {
                   ),
                 ),
                 TextField(
+                  controller: _primeiroNome,
                   decoration: InputDecoration(
-                      labelText: 'Nome Completo', border: OutlineInputBorder()),
+                      labelText: 'Nome', border: OutlineInputBorder()),
+                ),
+                SizedBox(height: 5),
+                TextField(
+                  decoration: InputDecoration(
+                      labelText: 'Sobrenome', border: OutlineInputBorder()),
                 ),
                 SizedBox(height: 5),
                 TextField(
@@ -83,7 +97,18 @@ class Cadastrar extends StatelessWidget {
                       label: Text('Cadastrar'),
                       icon: Icon(Icons.login),
                       onPressed: () {
-                        Navigator.pushNamed(context, '/login');
+                        // Navigator.pushNamed(context, '/login');
+                        // 
+                        
+                        setState(() {
+
+                          var msg = Mensagem(
+                            _primeiroNome.text
+                          );
+
+                          Navigator.pushNamed(context, '/login',
+                              arguments: msg);
+                        });
                       },
                       style: ElevatedButton.styleFrom(
                           primary: Colors.red[500],
@@ -98,4 +123,9 @@ class Cadastrar extends StatelessWidget {
       ),
     );
   }
+}
+
+class Mensagem {
+  final String primeiroNome;
+  Mensagem(this.primeiroNome);
 }

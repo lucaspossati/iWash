@@ -40,6 +40,7 @@ class _EsqueceSenhaState extends State<EsqueceSenha> {
                     label: Text('Enviar'),
                     icon: Icon(Icons.send),
                     onPressed: () {
+                      
                       Navigator.pushNamed(context, '/login');
                     },
                     style: ElevatedButton.styleFrom(
