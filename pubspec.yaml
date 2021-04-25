@@ -23,6 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  google_fonts: ^0.3.3
+    
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -63,6 +65,8 @@ flutter:
     - assets/images/Wash/wash6.jpg
     - assets/images/perfil.jpg
     - assets/images/login/reset-password-icon.png
+    - assets/images/login/iconProfile.png
+    - assets/images/desenvolvedores/lucasProfile.jpeg
 
 
 

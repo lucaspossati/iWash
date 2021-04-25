@@ -11,6 +11,7 @@ class Nave extends StatelessWidget {
             icon: Icon(Icons.home),
             label: 'Home',
             backgroundColor: Colors.blue,
+            
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.business),

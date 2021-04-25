@@ -27,7 +27,7 @@ class _EsqueceSenhaState extends State<EsqueceSenha> {
                 child: TextField(
                   
                   decoration: InputDecoration(
-                      labelText: 'E-mail', border: OutlineInputBorder()),
+                      labelText: 'E-mail'),
                 ),
               ),
               SizedBox(height: 5),

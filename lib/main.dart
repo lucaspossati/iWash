@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:iWash/lojaCard.dart';
 import 'package:iWash/sobre.dart';
-
 import 'cadastrar.dart';
 import 'esqueceSenha.dart';
 import 'lojas.dart';
@@ -11,7 +10,7 @@ import 'lojas.dart';
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    initialRoute: '/login',
+    initialRoute: '/home',
     routes: {
       '/login': (context) => Login(),
       '/esqueceSenha': (context) => EsqueceSenha(),
@@ -40,7 +39,7 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    // final Mensagem msg = ModalRoute.of(context).settings.arguments;
+     final Mensagem msg = ModalRoute.of(context).settings.arguments;
 
     return Scaffold(
       body: Center(
@@ -57,25 +56,30 @@ class _LoginState extends State<Login> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: Image.asset('assets/images/Wash/wash3.jpg'),
+                    child: Image.asset('assets/images/login/iconProfile.png',
+                        width: 140),
                   ),
                   borderRadius: BorderRadius.circular(20),
                 ),
               ),
+
               Padding(
                 padding: const EdgeInsets.only(top: 18.0),
-                child: TextField(
+                child: TextFormField(
+                  textAlign: TextAlign.center,
                   controller: _txtLogin,
                   decoration: InputDecoration(
-                      labelText: 'E-mail', border: OutlineInputBorder()),
+                      prefixIcon: Icon(Icons.account_circle),
+                      labelText: 'E-mail'),
                 ),
               ),
               SizedBox(height: 5),
               TextField(
+                textAlign: TextAlign.center,
                 obscureText: true,
                 controller: _txtSenha,
                 decoration: InputDecoration(
-                    labelText: 'Senha', border: OutlineInputBorder()),
+                    prefixIcon: Icon(Icons.lock), labelText: 'Senha'),
               ),
               SizedBox(height: 5),
               Padding(
@@ -146,9 +150,9 @@ class _LoginState extends State<Login> {
               ),
 
               //Error no such method error  invalid member on null 'primeiroNome'
-              // Text('Bem vindo', style:TextStyle(fontSize: 18, fontStyle: FontStyle.italic)),
-              // Text( msg.primeiroNome!=null?msg.primeiroNome:'Usuário não fornecido', style:TextStyle(fontSize: 15)),
-              // SizedBox(height: 20),
+              //  Text('Bem vindo', style:TextStyle(fontSize: 18, fontStyle: FontStyle.italic)),
+              //  Text( msg?.primeiroNome ?? 0, style:TextStyle(fontSize: 15)),
+              //  SizedBox(height: 20),
             ],
           ),
         ),
@@ -165,13 +169,54 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final pageViewController = PageController();
+
+  @override
+  void dispose(){
+    super.dispose();
+    pageViewController.dispose();
+  }
+  
   @override
   Widget build(BuildContext context) {
     List<Lojas> _listLojas = [];
     _listLojas = [];
     _listLojas.add(Lojas(
         logoEmpresa: 'assets/images/Wash/wash1.jpg',
+        nomeLoja: 'Loja Automotiva',
+        avaliacao: '4.8 ',
+        km: '3.3 km',
+        tempoBusca: '2 hrs',
+        precoBusca: '3,00'));
+    _listLojas.add(Lojas(
+        logoEmpresa: 'assets/images/Wash/wash2.jpg',
+        nomeLoja: 'Loja Automotiva',
+        avaliacao: '4.8 ',
+        km: '3.3 km',
+        tempoBusca: '2 hrs',
+        precoBusca: '3,00'));
+
+    _listLojas.add(Lojas(
+        logoEmpresa: 'assets/images/Wash/wash3.jpg',
+        nomeLoja: 'Loja Automotiva',
+        avaliacao: '4.8 ',
+        km: '3.3 km',
+        tempoBusca: '2 hrs',
+        precoBusca: '3,00'));
+
+    _listLojas.add(Lojas(
+        logoEmpresa: 'assets/images/Wash/wash4.jpg',
+        nomeLoja: 'Loja Automotiva',
+        avaliacao: '4.8 ',
+        km: '3.3 km',
+        tempoBusca: '2 hrs',
+        precoBusca: '3,00'));
+    
+    _listLojas.add(Lojas(
+        logoEmpresa: 'assets/images/Wash/wash5.jpg',
         nomeLoja: 'Loja Automotiva',
         avaliacao: '4.8 ',
         km: '3.3 km',
@@ -222,6 +267,7 @@ class _HomeState extends State<Home> {
         ),
       ),
       body: SingleChildScrollView(
+        controller: pageViewController,
         child: Center(
           child: Container(
             color: Colors.white,
@@ -311,7 +357,7 @@ class _HomeState extends State<Home> {
                   Container(
                     color: Colors.white,
                     margin: EdgeInsets.only(top: 18),
-                    padding: EdgeInsets.only(top: 18, left: 12),
+                    padding: EdgeInsets.only( left: 12),
                     alignment: Alignment.topLeft,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -325,7 +371,7 @@ class _HomeState extends State<Home> {
                             )),
                         Container(
                           padding: EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 10),
+                              horizontal: 20, vertical: 20),
                           child: Column(
                             children: <Widget>[
                               Form(
@@ -374,31 +420,48 @@ class _HomeState extends State<Home> {
               ),
             ),
           ),
+          
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Inicio',
-            backgroundColor: Colors.blue,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Pesquisar',
-            backgroundColor: Colors.green,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.article),
-            label: 'Sobre',
-            backgroundColor: Colors.purple,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Perfil',
-            backgroundColor: Colors.pink,
-          ),
-        ],
+      
+      bottomNavigationBar: AnimatedBuilder(
+        animation: pageViewController,
+        builder: (context, snapshot) {
+          return BottomNavigationBar(
+            currentIndex: pageViewController?.page?.round() ?? 0,
+            onTap: (index){
+              pageViewController.jumpToPage(index);
+            },
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'Inicio',
+                backgroundColor: Colors.blue,
+                 
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.search),
+                label: 'Pesquisar',
+                backgroundColor: Colors.blue,
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.article),
+                label: 'Sobre',
+                backgroundColor: Colors.blue,
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                label: 'Perfil',
+                backgroundColor: Colors.blue,
+              ),
+            ],
+            // onTap: (index){
+            //   setState(() {
+            //     _currentIndex = index;
+            //   });
+            // },
+          );
+        }
       ),
     );
   }
