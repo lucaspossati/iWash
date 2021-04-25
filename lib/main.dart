@@ -1,6 +1,7 @@
 // import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:iWash/lojaCard.dart';
 import 'package:iWash/sobre.dart';
 
 import 'cadastrar.dart';
@@ -17,13 +18,13 @@ void main() {
       '/cadastrar': (context) => Cadastrar(),
       '/home': (context) => Home(),
       '/sobre': (context) => Sobre(),
-      '/lojas': (context) => Lojas(
-          logoEmpresa: 'assets/images/Wash/wash1.jpg',
-          nomeLoja: 'Loja Automotiva',
-          avaliacao: '4.8 ',
-          km: '3.3 km',
-          tempoBusca: '2 hrs',
-          precoBusca: '3,00'),
+      // '/lojas': (context) => Lojas(
+      //     logoEmpresa: 'assets/images/Wash/wash1.jpg',
+      //     nomeLoja: 'Loja Automotiva',
+      //     avaliacao: '4.8 ',
+      //     km: '3.3 km',
+      //     tempoBusca: '2 hrs',
+      //     precoBusca: '3,00'),
     },
   ));
 }
@@ -39,7 +40,7 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    final Mensagem msg = ModalRoute.of(context).settings.arguments;
+    // final Mensagem msg = ModalRoute.of(context).settings.arguments;
 
     return Scaffold(
       body: Center(
@@ -157,9 +158,17 @@ class _LoginState extends State<Login> {
 }
 
 class Home extends StatefulWidget {
-  List<Lojas> _listLojas = [];
+  // Home() {}
 
-  Home() {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  @override
+  Widget build(BuildContext context) {
+    List<Lojas> _listLojas = [];
     _listLojas = [];
     _listLojas.add(Lojas(
         logoEmpresa: 'assets/images/Wash/wash1.jpg',
@@ -168,15 +177,7 @@ class Home extends StatefulWidget {
         km: '3.3 km',
         tempoBusca: '2 hrs',
         precoBusca: '3,00'));
-  }
 
-  @override
-  _HomeState createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('IWash'),
@@ -328,6 +329,7 @@ class _HomeState extends State<Home> {
                           child: Column(
                             children: <Widget>[
                               Form(
+                                key: _formKey,
                                 child: Row(
                                   children: <Widget>[
                                     Expanded(
@@ -353,7 +355,15 @@ class _HomeState extends State<Home> {
                                             )))
                                   ],
                                 ),
-                              )
+                              ),
+                              SizedBox(
+                                  child: ListView.builder(
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemCount: _listLojas.length,
+                                itemBuilder: (context, index) =>
+                                    LojaCard(lojas: _listLojas[index]),
+                              ))
                             ],
                           ),
                         )
