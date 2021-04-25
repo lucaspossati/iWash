@@ -1,47 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Sobre extends StatelessWidget {
+
+class Pesquisar extends StatefulWidget {
+  @override
+  _PesquisarState createState() => _PesquisarState();
+}
+
+class _PesquisarState extends State<Pesquisar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(
-          constraints: BoxConstraints(maxWidth: 600),
-          padding: EdgeInsets.only(top: 20, left: 8, right: 8),
-          child: Center(
+      body: SingleChildScrollView(
+        child: Center(
+          child: Container(
             child: Column(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Center(
-                      child: Text(
-                        'iWash',
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.lato(
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Center(
-                      child: Text(
-                        'Solicite uma lavagem no seu carro',
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.lato(
-                            fontSize: 21,
-                            color: Colors.grey,
-                            fontWeight: FontWeight.w700),
-                      ),
-                    ),
-                  ],
-                ),
                 Padding(
                   padding: const EdgeInsets.only(top: 20, left: 8, right: 8),
                   child: Row(
@@ -49,10 +23,10 @@ class Sobre extends StatelessWidget {
                     children: [
                       Center(
                         child: Text(
-                          'Desenvolvedores',
+                          'Categorias',
                           textAlign: TextAlign.center,
                           style: GoogleFonts.lato(
-                            fontSize: 25,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -73,7 +47,7 @@ class Sobre extends StatelessWidget {
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               image: DecorationImage(
-                                image: NetworkImage('assets/images/desenvolvedores/lucasProfile.jpeg'),
+                                image: AssetImage('assets/images/categorias/carros.jpg'),
                                 fit: BoxFit.fill
                               ),
                             ),
@@ -113,7 +87,7 @@ class Sobre extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Center(
-                                  child: Text('Lucas Davi',
+                                  child: Text('Carros',
                                       style: GoogleFonts.lato(
                                           fontSize: 16,
                                           color: Colors.grey,
@@ -141,30 +115,7 @@ class Sobre extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 26.0, left: 8, right: 8.0),
-                          child: Row(
-                            children: <Widget>[
-                              Center(
-                                  child: Text(
-                                      'O aplicativo foi desenvolvido com o intuito de você poder\n solicitar que uma pessoa vá até você e realize a lavagem no seu carro.\n Facilitando a vida das pessoas, pois a empresa realiza\n a lavagem no próprio local (se houver uma estrutura), ou também\npoderão levar o carro para a empresa e depois levar até você.',
-                                      style: GoogleFonts.lato(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black87))),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                    
                   ],
                 ),
               ],

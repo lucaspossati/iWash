@@ -1,8 +1,8 @@
-import 'dart:html';
+// import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:iWash/lojaCard.dart';
 import 'package:iWash/sobre.dart';
-
 import 'cadastrar.dart';
 import 'esqueceSenha.dart';
 import 'lojas.dart';
@@ -10,20 +10,20 @@ import 'lojas.dart';
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    initialRoute: '/login',
+    initialRoute: '/home',
     routes: {
       '/login': (context) => Login(),
       '/esqueceSenha': (context) => EsqueceSenha(),
       '/cadastrar': (context) => Cadastrar(),
       '/home': (context) => Home(),
       '/sobre': (context) => Sobre(),
-      '/lojas': (context) => Lojas(
-          logoEmpresa: 'assets/images/Wash/wash1.jpg',
-          nomeLoja: 'Loja Automotiva',
-          avaliacao: '4.8 ',
-          km: '3.3 km',
-          tempoBusca: '2 hrs',
-          precoBusca: '3,00'),
+      // '/lojas': (context) => Lojas(
+      //     logoEmpresa: 'assets/images/Wash/wash1.jpg',
+      //     nomeLoja: 'Loja Automotiva',
+      //     avaliacao: '4.8 ',
+      //     km: '3.3 km',
+      //     tempoBusca: '2 hrs',
+      //     precoBusca: '3,00'),
     },
   ));
 }
@@ -37,132 +37,152 @@ class _LoginState extends State<Login> {
   var _txtLogin = TextEditingController();
   var _txtSenha = TextEditingController();
 
-  
   @override
   Widget build(BuildContext context) {
-    final Mensagem msg = ModalRoute.of(context).settings.arguments;
+     final Mensagem msg = ModalRoute.of(context).settings.arguments;
 
     return Scaffold(
       body: Center(
         child: Container(
           constraints: BoxConstraints(maxWidth: 430),
           padding: EdgeInsets.all(40),
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            SizedBox(
-              width: 150,
-              child: ClipRRect(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 150,
+                child: ClipRRect(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Image.asset('assets/images/login/iconProfile.png',
+                        width: 140),
                   ),
-                  child: Image.asset('assets/images/Wash/wash3.jpg'),
+                  borderRadius: BorderRadius.circular(20),
                 ),
-                borderRadius: BorderRadius.circular(20),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 18.0),
-              child: TextField(
-                controller: _txtLogin,
+
+              Padding(
+                padding: const EdgeInsets.only(top: 18.0),
+                child: TextFormField(
+                  textAlign: TextAlign.center,
+                  controller: _txtLogin,
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.account_circle),
+                      labelText: 'E-mail'),
+                ),
+              ),
+              SizedBox(height: 5),
+              TextField(
+                textAlign: TextAlign.center,
+                obscureText: true,
+                controller: _txtSenha,
                 decoration: InputDecoration(
-                    labelText: 'E-mail', border: OutlineInputBorder()),
+                    prefixIcon: Icon(Icons.lock), labelText: 'Senha'),
               ),
-            ),
-            SizedBox(height: 5),
-            TextField(
-              obscureText: true,
-              controller: _txtSenha,
-              decoration: InputDecoration(
-                  labelText: 'Senha', border: OutlineInputBorder()),
-            ),
-            SizedBox(height: 5),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SizedBox(
-                width: double.infinity,
-                height: 33,
-                child: ElevatedButton.icon(
-                  label: Text('Entrar'),
-                  icon: Icon(Icons.login),
+              SizedBox(height: 5),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 33,
+                  child: ElevatedButton.icon(
+                    label: Text('Entrar'),
+                    icon: Icon(Icons.login),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/home');
+                    },
+                    style: ElevatedButton.styleFrom(
+                        primary: Colors.red[500],
+                        textStyle: TextStyle(fontSize: 15)),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 33,
+                  child: ElevatedButton.icon(
+                    label: Text('Esqueci a senha'),
+                    icon: Icon(Icons.password),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/esqueceSenha');
+                    },
+                    style: ElevatedButton.styleFrom(
+                        primary: Colors.red[500],
+                        textStyle: TextStyle(fontSize: 15)),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 33,
+                  child: ElevatedButton.icon(
+                    label: Text('Logar com o Facebook'),
+                    icon: Icon(Icons.facebook),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/home');
+                    },
+                    style: ElevatedButton.styleFrom(
+                        primary: Colors.blue[500],
+                        textStyle: TextStyle(fontSize: 15)),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: TextButton(
+                  child: Text(
+                    "Cadastrar-se",
+                    textAlign: TextAlign.right,
+                    style: TextStyle(
+                        color: Colors.red[800],
+                        decoration: TextDecoration.underline),
+                  ),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/home');
+                    Navigator.pushNamed(context, '/cadastrar');
                   },
-                  style: ElevatedButton.styleFrom(
-                      primary: Colors.red[500],
-                      textStyle: TextStyle(fontSize: 15)),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SizedBox(
-                width: double.infinity,
-                height: 33,
-                child: ElevatedButton.icon(
-                  label: Text('Esqueci a senha'),
-                  icon: Icon(Icons.password),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/esqueceSenha');
-                  },
-                  style: ElevatedButton.styleFrom(
-                      primary: Colors.red[500],
-                      textStyle: TextStyle(fontSize: 15)),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: SizedBox(
-                width: double.infinity,
-                height: 33,
-                child: ElevatedButton.icon(
-                  label: Text('Logar com o Facebook'),
-                  icon: Icon(Icons.facebook),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/home');
-                  },
-                  style: ElevatedButton.styleFrom(
-                      primary: Colors.blue[500],
-                      textStyle: TextStyle(fontSize: 15)),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: TextButton(
-                child: Text(
-                  "Cadastrar-se",
-                  textAlign: TextAlign.right,
-                  style: TextStyle(
-                      color: Colors.red[800],
-                      decoration: TextDecoration.underline),
-                ),
-                onPressed: () {
-                  Navigator.pushNamed(context, '/cadastrar');
-                },
-              ),
-            ),
-          
-            //Error no such method error  invalid member on null 'primeiroNome'
-            // Text('Bem vindo', style:TextStyle(fontSize: 18, fontStyle: FontStyle.italic)),  
-            // Text( msg.primeiroNome!=null?msg.primeiroNome:'Usuário não fornecido', style:TextStyle(fontSize: 15)),  
-            // SizedBox(height: 20),
-          
-          ],
+
+              //Error no such method error  invalid member on null 'primeiroNome'
+              //  Text('Bem vindo', style:TextStyle(fontSize: 18, fontStyle: FontStyle.italic)),
+              //  Text( msg?.primeiroNome ?? 0, style:TextStyle(fontSize: 15)),
+              //  SizedBox(height: 20),
+            ],
           ),
-          
         ),
       ),
     );
   }
 }
 
-
-
 class Home extends StatefulWidget {
-  List<Lojas> _listLojas = [];
+  // Home() {}
 
-  Home() {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+
+  
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final pageViewController = PageController();
+
+  @override
+  void dispose(){
+    super.dispose();
+    pageViewController.dispose();
+  }
+  
+  @override
+  Widget build(BuildContext context) {
+    List<Lojas> _listLojas = [];
     _listLojas = [];
     _listLojas.add(Lojas(
         logoEmpresa: 'assets/images/Wash/wash1.jpg',
@@ -171,19 +191,42 @@ class Home extends StatefulWidget {
         km: '3.3 km',
         tempoBusca: '2 hrs',
         precoBusca: '3,00'));
-  }
+    _listLojas.add(Lojas(
+        logoEmpresa: 'assets/images/Wash/wash2.jpg',
+        nomeLoja: 'Loja Automotiva',
+        avaliacao: '4.8 ',
+        km: '3.3 km',
+        tempoBusca: '2 hrs',
+        precoBusca: '3,00'));
 
-  @override
-  _HomeState createState() => _HomeState();
-}
+    _listLojas.add(Lojas(
+        logoEmpresa: 'assets/images/Wash/wash3.jpg',
+        nomeLoja: 'Loja Automotiva',
+        avaliacao: '4.8 ',
+        km: '3.3 km',
+        tempoBusca: '2 hrs',
+        precoBusca: '3,00'));
 
-class _HomeState extends State<Home> {
-  @override
-  Widget build(BuildContext context) {
+    _listLojas.add(Lojas(
+        logoEmpresa: 'assets/images/Wash/wash4.jpg',
+        nomeLoja: 'Loja Automotiva',
+        avaliacao: '4.8 ',
+        km: '3.3 km',
+        tempoBusca: '2 hrs',
+        precoBusca: '3,00'));
+    
+    _listLojas.add(Lojas(
+        logoEmpresa: 'assets/images/Wash/wash5.jpg',
+        nomeLoja: 'Loja Automotiva',
+        avaliacao: '4.8 ',
+        km: '3.3 km',
+        tempoBusca: '2 hrs',
+        precoBusca: '3,00'));
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: const Text('IWash'),
+        backgroundColor: Colors.blue,
       ),
       drawer: Drawer(
         child: ListView(
@@ -224,6 +267,7 @@ class _HomeState extends State<Home> {
         ),
       ),
       body: SingleChildScrollView(
+        controller: pageViewController,
         child: Center(
           child: Container(
             color: Colors.white,
@@ -313,59 +357,111 @@ class _HomeState extends State<Home> {
                   Container(
                     color: Colors.white,
                     margin: EdgeInsets.only(top: 18),
-                    padding: EdgeInsets.only(top: 18, left: 12),
+                    padding: EdgeInsets.only( left: 12),
                     alignment: Alignment.topLeft,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Container(
-                          margin: EdgeInsets.only(bottom: 10),
-                          child: Text(
-                            'Lojas',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 17),
+                            margin: EdgeInsets.only(bottom: 10),
+                            child: Text(
+                              'Lojas',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 17),
+                            )),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 20),
+                          child: Column(
+                            children: <Widget>[
+                              Form(
+                                key: _formKey,
+                                child: Row(
+                                  children: <Widget>[
+                                    Expanded(
+                                        child: TextFormField(
+                                      style: TextStyle(
+                                          fontSize: 24, color: Colors.black38),
+                                      decoration: InputDecoration(
+                                          hintText: "Pesquise sua loja",
+                                          hintStyle: TextStyle(fontSize: 18)),
+                                      keyboardType: TextInputType.text,
+                                    )),
+                                    Container(
+                                        margin: EdgeInsets.only(left: 20),
+                                        child: ElevatedButton(
+                                            child: Icon(Icons.search),
+                                            onPressed: () {
+                                              print("Clicado");
+                                            },
+                                            style: ButtonStyle(
+                                              backgroundColor:
+                                                  MaterialStateProperty.all<
+                                                      Color>(Colors.blue),
+                                            )))
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                  child: ListView.builder(
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemCount: _listLojas.length,
+                                itemBuilder: (context, index) =>
+                                    LojaCard(lojas: _listLojas[index]),
+                              ))
+                            ],
                           ),
-                          // Lojas(
-                          //   logoEmpresa: 'assets/images/Wash/wash1.jpg',
-                          //   nomeLoja: 'Loja Automotiva',
-                          //   avaliacao: '4.8 ',
-                          //   km: '3.3 km',
-                          //   tempoBusca: '2 hrs',
-                          //   precoBusca: '3,00'),
-                        ),
+                        )
                       ],
                     ),
                   ),
-                  
                 ],
               ),
             ),
           ),
+          
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Inicio',
-            backgroundColor: Colors.red,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Pesquisar',
-            backgroundColor: Colors.green,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.article),
-            label: 'Sobre',
-            backgroundColor: Colors.purple,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Perfil',
-            backgroundColor: Colors.pink,
-          ),
-        ],
+      
+      bottomNavigationBar: AnimatedBuilder(
+        animation: pageViewController,
+        builder: (context, snapshot) {
+          return BottomNavigationBar(
+            currentIndex: pageViewController?.page?.round() ?? 0,
+            onTap: (index){
+              pageViewController.jumpToPage(index);
+            },
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'Inicio',
+                backgroundColor: Colors.blue,
+                 
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.search),
+                label: 'Pesquisar',
+                backgroundColor: Colors.blue,
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.article),
+                label: 'Sobre',
+                backgroundColor: Colors.blue,
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                label: 'Perfil',
+                backgroundColor: Colors.blue,
+              ),
+            ],
+            // onTap: (index){
+            //   setState(() {
+            //     _currentIndex = index;
+            //   });
+            // },
+          );
+        }
       ),
     );
   }
