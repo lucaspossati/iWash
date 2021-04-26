@@ -57,7 +57,8 @@ class _LoginState extends State<Login> {
                   controller: _usuarioLogado,
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.account_circle),
-                      labelText: 'E-mail'),
+                      labelText: 'E-mail',
+                  ),
                 ),
               ),
               SizedBox(height: 5),
@@ -155,7 +156,7 @@ class _LoginState extends State<Login> {
                 child: Text(
                   "Ainda não é registrado ?",
                   textAlign: TextAlign.right,
-                  style: GoogleFonts.lato(color: Colors.white),
+                  style: GoogleFonts.lato(color: Colors.white54),
                 ),
               ),
 
@@ -166,7 +167,7 @@ class _LoginState extends State<Login> {
                     "Registre-se",
                     textAlign: TextAlign.right,
                     style: GoogleFonts.lato(
-                        color: Colors.white24,
+                        color: Colors.white70,
                         decoration: TextDecoration.underline),
                   ),
                   onPressed: () {
