@@ -12,7 +12,13 @@ class _EsqueceSenhaState extends State<EsqueceSenha> {
     return Scaffold(
       body: Center(
         child: Container(
-          constraints: BoxConstraints(maxWidth: 400),
+          constraints: BoxConstraints(maxWidth: 430, maxHeight: 650),
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage(
+                      'assets/images/background/background-image.jpg'),
+                  fit: BoxFit.cover),
+              borderRadius: new BorderRadius.circular(26.0)),
           padding: EdgeInsets.all(40),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
