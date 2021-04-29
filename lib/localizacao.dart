@@ -1,6 +1,8 @@
+import 'package:geolocator/geolocator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 
 import 'main.dart';
 
@@ -11,15 +13,48 @@ class Localizacao extends StatefulWidget {
 
 class _LocalizacaoState extends State<Localizacao> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+
   GoogleMapController mapController;
   Set<Marker> markers = new Set<Marker>();
-  double lat = -21.2187885;
-  double long = -47.8257621;
+
+  String _locationMessage = "";
+  Position currentPosition;
+  var geoLocator = Geolocator();
+
+  double lat = 37.4250635;
+  double long = -122.0930383;
+
 
   void _onMapCreated(GoogleMapController controller){
     mapController = controller;
-    
   }
+
+  void _getCurrentLocation() async{
+    // LocationPermission permission = await Geolocator.requestPermission();
+    // LocationPermission permissionChecked = await Geolocator.checkPermission();
+
+    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    currentPosition = position;
+
+    LatLng latLngPosition = LatLng(position.latitude, position.longitude);
+
+    CameraPosition cameraPosition = new CameraPosition(target: latLngPosition, zoom: 17);
+
+    //newGoogleMapPosition
+    mapController.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+    print(position);
+
+    setState(() {
+      long = position.longitude;
+      lat = position.latitude;
+      _locationMessage = "${position.latitude}, ${position.longitude}";
+    });
+  }
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,16 +73,19 @@ class _LocalizacaoState extends State<Localizacao> {
 
                       height: MediaQuery.of(context).size.height *0.43,
                       child: GoogleMap(
+                        mapType: MapType.normal,
+                        myLocationButtonEnabled: true,
+                        myLocationEnabled: true,
+                        zoomGesturesEnabled: true,
+                        zoomControlsEnabled: true,
                         onMapCreated: _onMapCreated,
                         onCameraMove: (data){
                           print(data);
                         },
-                        onTap: (position){
-                          print(position);
-                        },
+
                         initialCameraPosition: CameraPosition(
                             target: LatLng(lat, long),
-                            zoom: 11.0
+                            zoom: 14.0
                         ),
                         markers: markers,
                       ),
@@ -199,12 +237,7 @@ class _LocalizacaoState extends State<Localizacao> {
                                               ),
                                             ),
                                             onTap: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) => NavBar(),
-                                                ),
-                                              );
+                                              _getCurrentLocation();
                                             },
                                           ),
                                         ),

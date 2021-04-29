@@ -1,5 +1,4 @@
 // import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iWash/lojaCard.dart';
@@ -33,19 +32,22 @@ void main() {
       //     precoBusca: '3,00'),
     },
   ));
+
 }
+
+
 
 class NavBar extends StatefulWidget {
   // Home() {}
 
   @override
+
   _NavBarState createState() => _NavBarState();
 }
 
 class _NavBarState extends State<NavBar> {
 
   final pageViewController = PageController();
-  
 
   @override
   void dispose() {
@@ -56,9 +58,11 @@ class _NavBarState extends State<NavBar> {
   @override
   Widget build(BuildContext context) {
     final UsuarioLogado nomeUsuario = ModalRoute.of(context).settings.arguments;
+    String tituloBar = "Centros Automotivos";
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Centros Automotivos'),
+        title: Text(tituloBar),
         backgroundColor: Colors.blue,
       ),
       drawer: Drawer(
@@ -155,7 +159,7 @@ class _NavBarState extends State<NavBar> {
           Home(),
           Pesquisar(),
           Sobre(),
-          Perfil(),
+
         ],
       ),
       bottomNavigationBar: AnimatedBuilder(
