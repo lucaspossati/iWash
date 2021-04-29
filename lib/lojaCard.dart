@@ -24,6 +24,11 @@ class LojaCard extends StatelessWidget {
       ]),
       subtitle: Row(
         children: [
+           Icon(
+            Icons.star_rate,
+            color: Colors.orange,
+            size: 15,
+          ),
           Text(
             lojas.avaliacao,
             style: TextStyle(
@@ -31,12 +36,7 @@ class LojaCard extends StatelessWidget {
               fontSize: 12,
               color: Colors.orange,
             ),
-          ),
-          Icon(
-            Icons.star_rate,
-            color: Colors.orange,
-            size: 15,
-          ),
+          ),        
           Text(
             ' ' + lojas.km,
             style: TextStyle(
