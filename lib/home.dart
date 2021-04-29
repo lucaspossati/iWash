@@ -19,7 +19,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    final UsuarioLogado nomeUsuario = ModalRoute.of(context).settings.arguments;
+    // final UsuarioLogado nomeUsuario = ModalRoute.of(context).settings.arguments;
 
     List<Lojas> _listLojas = [];
     _listLojas = [];
@@ -63,75 +63,7 @@ class _HomeState extends State<Home> {
         precoBusca: '3,00'));
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('IWash'),
-        backgroundColor: Colors.blue,
-      ),
-      drawer: Drawer(
-        child: ListView(
-          
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Center(
-                child: Container(
-                  child: Center(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 80.0),
-                          child: Column(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(bottom: 10),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
-                                  child: Image.asset(
-                                      'assets/images/login/iconProfile.png',
-                                      height: 100),
-                                ),
-                              ),
-                              Row(
-                                children: [
-                                  Text(nomeUsuario.usuarioLogado,
-                                      style: GoogleFonts.lato(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 17,
-                                          color: Colors.white)),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.message),
-              title: Text('Chats'),
-            ),
-            ListTile(
-              leading: Icon(Icons.account_circle),
-              title: Text('Meus dados'),
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Configurações'),
-            ),
-            ListTile(
-              leading: Icon(Icons.logout),
-              title: Text('Sair'),
-            ),
-          ],
-        ),
-      ),
+
       body: SingleChildScrollView(
         child: Center(
           child: Container(
@@ -144,12 +76,7 @@ class _HomeState extends State<Home> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Row(
-                    children: [
-                      Text(nomeUsuario.usuarioLogado,
-                          style: TextStyle(fontSize: 15, color: Colors.white)),
-                    ],
-                  ),
+                  
                   Text(
                     'BUSCAR EM',
                     style: TextStyle(

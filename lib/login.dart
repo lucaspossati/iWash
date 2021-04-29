@@ -11,194 +11,232 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  var _txtLogin = TextEditingController();
   var _txtSenha = TextEditingController();
   var _usuarioLogado = TextEditingController();
+  FocusNode myFocusNode = new FocusNode();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(
-          constraints: BoxConstraints(maxWidth: 430, maxHeight: 650),
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(
-                      'assets/images/background/background-image.jpg'),
-                  fit: BoxFit.cover),
-              borderRadius: new BorderRadius.circular(26.0)),
-          padding: EdgeInsets.all(40),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: 150,
-                child: ClipRRect(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Image.asset('assets/images/login/iconProfile.png',
-                        width: 140),
-                  ),
-                  borderRadius: BorderRadius.circular(20),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Container(
+            constraints: BoxConstraints(maxWidth: 430),
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(
+                        'assets/images/background/back2.png'),
+                    fit: BoxFit.cover),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 18.0),
-                child: TextFormField(
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Por favor, digite um e-mail ou usuário!';
-                    }
-                    return null;
-                  },
+
+            // decoration: BoxDecoration(
+            //   color: Colors.blue.shade900,
+            //   // borderRadius: new BorderRadius.circular(26.0)
+            // ),
+            padding: EdgeInsets.all(40),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 150,
+                  child: ClipRRect(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Image.asset('assets/images/login/iconProfile.png',
+                          width: 140),
+                    ),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 18.0),
+                  child: TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Por favor, digite um e-mail ou usuário!';
+                      }
+                      return null;
+                    },
+
+                    style: TextStyle(color: Colors.white),
+                    textAlign: TextAlign.center,
+                    controller: _usuarioLogado,
+
+                    decoration: InputDecoration(
+                      fillColor: Colors.white,
+                        prefixIcon: Icon(Icons.account_circle, color: Colors.white70,),
+                        labelText: 'E-mail',
+                        labelStyle: TextStyle(
+                            color: myFocusNode.hasFocus ? Colors.blue : Colors.white
+                        ),
+                    ),
+                    autofocus: true,
+
+                  ),
+                ),
+                SizedBox(height: 5),
+                TextField(
                   textAlign: TextAlign.center,
-                  controller: _usuarioLogado,
+                  style: TextStyle(color: Colors.white),
+                  obscureText: true,
+
+                  controller: _txtSenha,
                   decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.account_circle),
-                      labelText: 'E-mail'),
+                      prefixIcon: Icon(Icons.lock, color: Colors.white70), labelText: 'Senha',
+                  labelStyle: TextStyle(
+                      color: myFocusNode.hasFocus ? Colors.blue : Colors.white
+                  ),
+                  ),
                 ),
-              ),
-              SizedBox(height: 5),
-              TextField(
-                textAlign: TextAlign.center,
-                obscureText: true,
-                controller: _txtSenha,
-                decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.lock), labelText: 'Senha'),
-              ),
-              SizedBox(height: 5),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SizedBox(
-                  width: double.infinity,
-                  height: 37,
-                  child: ElevatedButton.icon(
-                    label: Text('Entrar'),
-                    icon: Icon(Icons.login),
-                    onPressed: () {
-                      // Navigator.pushNamed(context, '/home');                  
-                      setState(() {
-                        var nomeUsuario = UsuarioLogado(_usuarioLogado.text);
+                SizedBox(height: 5),
+                Padding(
+                  padding: const EdgeInsets.only(top: 32.0, bottom: 8),
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: 37,
+                    child: ElevatedButton.icon(
+                      label: Text('Entrar'),
+                      icon: Icon(Icons.login, color: Colors.white),
+                      onPressed: () {
+                        // Navigator.pushNamed(context, '/home');
+                        setState(() {
+                          var nomeUsuario = UsuarioLogado(_usuarioLogado.text);
 
-                        Navigator.pushNamed(context, '/navegacao',
-                            arguments: nomeUsuario);
-                      });
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.red[500],
-                      textStyle: TextStyle(fontSize: 15),
-                      shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(45.0),
+                          Navigator.pushNamed(context, '/navegacao',
+                              arguments: nomeUsuario);
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.red[500],
+                        textStyle: TextStyle(fontSize: 15),
+                        shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(45.0),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              // Padding(
-              //   padding: const EdgeInsets.all(8.0),
-              //   child: SizedBox(
-              //     width: double.infinity,
-              //     height: 33,
-              //     child: ElevatedButton.icon(
-              //       label: Text('Esqueci a senha'),
-              //       icon: Icon(Icons.password),
-              //       onPressed: () {
-              //         Navigator.pushNamed(context, '/esqueceSenha');
-              //       },
-              //       style: ElevatedButton.styleFrom(
-              //           primary: Colors.red[500],
-              //           textStyle: TextStyle(fontSize: 15)),
-              //     ),
-              //   ),
-              // ),
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: SizedBox(
-                  width: double.infinity,
-                  height: 37,
-                  child: ElevatedButton.icon(
-                    label: Text('Logar com o Facebook'),
-                    icon: Icon(Icons.facebook),
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/home');
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.blue[500],
-                      textStyle: TextStyle(fontSize: 15),
-                      shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(45.0),
+                // Padding(
+                //   padding: const EdgeInsets.all(8.0),
+                //   child: SizedBox(
+                //     width: double.infinity,
+                //     height: 33,
+                //     child: ElevatedButton.icon(
+                //       label: Text('Esqueci a senha'),
+                //       icon: Icon(Icons.password),
+                //       onPressed: () {
+                //         Navigator.pushNamed(context, '/esqueceSenha');
+                //       },
+                //       style: ElevatedButton.styleFrom(
+                //           primary: Colors.red[500],
+                //           textStyle: TextStyle(fontSize: 15)),
+                //     ),
+                //   ),
+                // ),
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: 37,
+                    child: ElevatedButton.icon(
+                      label: Text('Logar com o Facebook'),
+                      icon: Icon(Icons.lock),
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/home');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.blue[500],
+                        textStyle: TextStyle(fontSize: 15),
+                        shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(45.0),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: TextButton(
-                  child: Text(
-                    "Esqueci a senha",
-                    textAlign: TextAlign.right,
-                    style: TextStyle(
-                        color: Colors.blue,
-                        decoration: TextDecoration.underline),
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: TextButton(
+                    child: Text(
+                      "Esqueci a senha",
+                      textAlign: TextAlign.right,
+                      style: TextStyle(
+                          color: Colors.blue,
+                          decoration: TextDecoration.underline),
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/esqueceSenha');
+                    },
                   ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/esqueceSenha');
-                  },
                 ),
-              ),
 
-              Padding(
-                padding: const EdgeInsets.only(top: 25.0),
-                child: Text(
-                  "Ainda não é registrado ?",
-                  textAlign: TextAlign.right,
-                  style: GoogleFonts.lato(color: Colors.white),
-                ),
-              ),
-
-              Padding(
-                padding: const EdgeInsets.only(right: 12.0, left: 12.0),
-                child: TextButton(
+                Padding(
+                  padding: const EdgeInsets.only(top: 20.0),
                   child: Text(
-                    "Registre-se",
+                    "Ainda não é registrado ?",
                     textAlign: TextAlign.right,
-                    style: GoogleFonts.lato(
-                        color: Colors.white24,
-                        decoration: TextDecoration.underline),
+                    style: GoogleFonts.lato(color: Colors.white70),
                   ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/cadastrar');
-                  },
                 ),
-              ),
 
-              // if(msg?.primeiroNome != null){
-              //   AlertDialog(
-              //   title: Text("Usuário cadastrado com sucesso!"),
-              //   content: Text(msg?.primeiroNome ?? '',
-              //       style: TextStyle(fontSize: 15)),
+                Padding(
+                  padding: const EdgeInsets.only(right: 12.0, left: 12.0),
+                  child: TextButton(
+                    child: Text(
+                      "Registre-se",
+                      textAlign: TextAlign.right,
+                      style: GoogleFonts.lato(
+                          color: Colors.white,
+                          decoration: TextDecoration.underline),
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/cadastrar');
+                    },
+                  ),
+                ),
 
-              //   actions: [
-              //     ElevatedButton(
-              //       child: Text("Sim"),
-              //       onPressed: () {
-              //         Navigator.pushNamed(context, '/navegacao');
-              //       },
-              //     ),
-              //     ElevatedButton(
-              //       child: Text("Não"),
-              //       onPressed: () {
-              //         Navigator.pushNamed(context, '/login');
-              //       },
-              //     ),
-              //   ],
-              //   elevation: 24.0,
-              // ),
-              // },
-            ],
+                Padding(
+                  padding: const EdgeInsets.only(right: 12.0, left: 12.0),
+                  child: TextButton(
+                    child: Text(
+                      "Tornar-se parceiro",
+                      textAlign: TextAlign.right,
+                      style: GoogleFonts.lato(
+                          color: Colors.white,
+                          decoration: TextDecoration.underline)
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/cadastrar');
+                    },
+                  ),
+                ),
+                // if(msg?.primeiroNome != null){
+                //   AlertDialog(
+                //   title: Text("Usuário cadastrado com sucesso!"),
+                //   content: Text(msg?.primeiroNome ?? '',
+                //       style: TextStyle(fontSize: 15)),
+
+                //   actions: [
+                //     ElevatedButton(
+                //       child: Text("Sim"),
+                //       onPressed: () {
+                //         Navigator.pushNamed(context, '/navegacao');
+                //       },
+                //     ),
+                //     ElevatedButton(
+                //       child: Text("Não"),
+                //       onPressed: () {
+                //         Navigator.pushNamed(context, '/login');
+                //       },
+                //     ),
+                //   ],
+                //   elevation: 24.0,
+                // ),
+                // },
+              ],
+            ),
           ),
         ),
       ),
@@ -207,6 +245,7 @@ class _LoginState extends State<Login> {
 }
 
 class UsuarioLogado {
-  final String usuarioLogado;
+   
+  String usuarioLogado = '';
   UsuarioLogado(this.usuarioLogado);
 }

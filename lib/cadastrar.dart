@@ -9,6 +9,7 @@ class Cadastrar extends StatefulWidget {
 
 class _CadastrarState extends State<Cadastrar> {
   var _primeiroNome = TextEditingController();
+  FocusNode myFocusNode = new FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +18,17 @@ class _CadastrarState extends State<Cadastrar> {
         child: Center(
           child: Container(
             constraints: BoxConstraints(maxWidth: 430),
-            decoration: BoxDecoration(
-                image: DecorationImage(
+             decoration: BoxDecoration(
+                 image: DecorationImage(
                     image: AssetImage(
-                        'assets/images/background/background-image.jpg'),
-                    fit: BoxFit.cover),
-                borderRadius: new BorderRadius.circular(26.0)),
+                       'assets/images/background/back2.png'),
+                     fit: BoxFit.cover),
+                 ),
+
+            // decoration: BoxDecoration(
+            //   color: Colors.blue.shade900,
+            //   // borderRadius: new BorderRadius.circular(26.0)
+            // ),
             padding: EdgeInsets.all(20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -56,50 +62,70 @@ class _CadastrarState extends State<Cadastrar> {
                   ),
                 ),
                 TextField(
+                  focusNode: myFocusNode,
                   controller: _primeiroNome,
-                  decoration: InputDecoration(labelText: 'Nome'),
+                  decoration: InputDecoration(labelText: 'Nome', labelStyle: TextStyle(
+                      color: myFocusNode.hasFocus ? Colors.white : Colors.blue
+                  )),
                 ),
                 SizedBox(height: 5),
                 TextField(
-                  decoration: InputDecoration(labelText: 'Sobrenome'),
+                  decoration: InputDecoration(labelText: 'Sobrenome', labelStyle: TextStyle(
+                      color: myFocusNode.hasFocus ? Colors.white : Colors.blue)),
                 ),
                 SizedBox(height: 5),
                 TextField(
-                  decoration: InputDecoration(labelText: 'E-mail'),
+                  decoration: InputDecoration(labelText: 'E-mail', labelStyle: TextStyle(
+                      color: myFocusNode.hasFocus ? Colors.white : Colors.blue)),
                 ),
                 SizedBox(height: 5),
                 TextField(
-                  decoration: InputDecoration(labelText: 'CPF'),
+                  decoration: InputDecoration(labelText: 'CPF', labelStyle: TextStyle(
+                      color: myFocusNode.hasFocus ? Colors.white : Colors.blue)),
                 ),
                 SizedBox(height: 5),
                 TextField(
-                  decoration: InputDecoration(labelText: 'Data de Nascimento'),
+                  decoration: InputDecoration(labelText: 'Data de Nascimento', labelStyle: TextStyle(
+                      color: myFocusNode.hasFocus ? Colors.white : Colors.blue
+                  )),
                 ),
                 SizedBox(height: 5),
                 TextField(
-                  decoration: InputDecoration(labelText: 'CEP'),
+                  decoration: InputDecoration(labelText: 'CEP', labelStyle: TextStyle(
+                  color: myFocusNode.hasFocus ? Colors.white : Colors.blue
+                  )),
                 ),
                 SizedBox(height: 5),
                 TextField(
-                  decoration: InputDecoration(labelText: 'Endereço'),
+                  decoration: InputDecoration(labelText: 'Endereço', labelStyle: TextStyle(
+                      color: myFocusNode.hasFocus ? Colors.white : Colors.blue
+                  )),
                 ),
                 SizedBox(height: 5),
                 TextField(
-                  decoration: InputDecoration(labelText: 'Nº'),
+                  decoration: InputDecoration(labelText: 'Nº', labelStyle: TextStyle(
+                      color: myFocusNode.hasFocus ?Colors.white : Colors.blue
+                  )),
                 ),
                 SizedBox(height: 5),
                 TextField(
-                  decoration: InputDecoration(labelText: 'Cidade'),
+                  decoration: InputDecoration(labelText: 'Cidade', labelStyle: TextStyle(
+                      color: myFocusNode.hasFocus ? Colors.white : Colors.blue
+                  )),
                 ),
                 SizedBox(height: 5),
                 TextField(
                   obscureText: true,
-                  decoration: InputDecoration(labelText: 'Senha'),
+                  decoration: InputDecoration(labelText: 'Senha', labelStyle: TextStyle(
+                      color: myFocusNode.hasFocus ? Colors.white : Colors.blue
+                  )),
                 ),
                 SizedBox(height: 5),
                 TextField(
                   obscureText: true,
-                  decoration: InputDecoration(labelText: 'Confirmar Senha'),
+                  decoration: InputDecoration(labelText: 'Confirmar Senha', labelStyle: TextStyle(
+                      color: myFocusNode.hasFocus ? Colors.white : Colors.blue
+                  )),
                 ),
                 SizedBox(height: 5),
                 Padding(

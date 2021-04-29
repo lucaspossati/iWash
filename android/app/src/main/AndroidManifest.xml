@@ -3,6 +3,8 @@
    <application
         android:label="iWash"
         android:icon="@mipmap/ic_launcher">
+
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyD-k-8TaC2KTzVDRzXJm7Lo2UP2Q1KwCkg"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
