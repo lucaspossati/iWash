@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import 'main.dart';
+
 class Localizacao extends StatefulWidget {
   @override
   _LocalizacaoState createState() => _LocalizacaoState();
@@ -29,7 +31,7 @@ class _LocalizacaoState extends State<Localizacao> {
           child: Column(
             children: [
               Container(
-
+                
                 child: Column(
                   children: [
                     SizedBox(
@@ -56,6 +58,7 @@ class _LocalizacaoState extends State<Localizacao> {
               ),
               SingleChildScrollView(
                 child: Container(
+                   transform: Matrix4.translationValues(0.0, -10.0, 0.0),
                   child: Column(
                     children: [
                       Stack(
@@ -63,21 +66,21 @@ class _LocalizacaoState extends State<Localizacao> {
                         alignment: Alignment.topCenter,
                         children: [
                           SizedBox(
-                            height: MediaQuery.of(context).size.height *0.4543,
+                            // height: MediaQuery.of(context).size.height *0.4543,
                             child: Positioned(
                               top: -50.0,
                               left: -15.0,
                               child: Container(
-                                constraints: BoxConstraints(maxWidth: 430, maxHeight: 400),
+                                constraints: BoxConstraints(maxWidth: 430),
 
                                 decoration: BoxDecoration(
                                   color: Colors.white,
-                                  borderRadius: const BorderRadius.only(topLeft: Radius.circular(17.0), topRight: Radius.circular(17.0)),
+                                  borderRadius: const BorderRadius.only(topLeft: Radius.circular(23.0), topRight: Radius.circular(23.0)),
                                   boxShadow: [
                                     BoxShadow(
                                       color: Colors.black.withOpacity(0.8),
-                                      spreadRadius: 10,
-                                      blurRadius: 10,
+                                      spreadRadius: 4,
+                                      blurRadius: 4,
                                       offset: Offset(0, 3), // changes position of shadow
                                     ),
                                   ],
@@ -87,7 +90,7 @@ class _LocalizacaoState extends State<Localizacao> {
                                     Container(
                                       color: Colors.white,
                                       margin: EdgeInsets.only(top: 18),
-                                      padding: EdgeInsets.only(left: 12),
+                                      padding: EdgeInsets.only(left: 21),
                                       alignment: Alignment.topLeft,
                                       constraints: BoxConstraints( maxHeight: 150),
                                       child: Column(
@@ -101,8 +104,7 @@ class _LocalizacaoState extends State<Localizacao> {
                                                     fontWeight: FontWeight.bold, fontSize: 17),
                                               )),
                                           Container(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 20, vertical: 20),
+                                            padding: EdgeInsets.only(top: 11.0, left: 21.0, right: 21.0),
                                             child: Column(
                                               children: <Widget>[
                                                 Form(
@@ -149,18 +151,7 @@ class _LocalizacaoState extends State<Localizacao> {
                                                       //       hintStyle: TextStyle(fontSize: 18)),
                                                       //   keyboardType: TextInputType.text,
                                                       // )),
-                                                      Container(
-                                                          margin: EdgeInsets.only(left: 20),
-                                                          child: ElevatedButton(
-                                                              child: Icon(Icons.search),
-                                                              onPressed: () {
-                                                                print('pesquisa');
-                                                              },
-                                                              style: ButtonStyle(
-                                                                backgroundColor:
-                                                                MaterialStateProperty.all<
-                                                                    Color>(Colors.blue),
-                                                              )))
+                                                      
                                                     ],
                                                   ),
                                                 ),
@@ -171,7 +162,237 @@ class _LocalizacaoState extends State<Localizacao> {
                                       ),
                                     ),
                                     Container(
-
+                                      transform: Matrix4.translationValues(0.0, -12.0, 0.0),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(left: 19, right: 19.0),
+                                        child: Container(
+                                          height: 85,
+                                          width: MediaQuery.of(context).size.width * 0.8,
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey[100],
+                                            borderRadius: new BorderRadius.circular(9.0)
+                                          ),
+                                          child: ListTile(
+                                            leading: Padding(
+                                              padding: const EdgeInsets.only(top: 15.0),
+                                              child: Icon(Icons.location_on),
+                                            ),
+                                            title: Padding(
+                                              padding: const EdgeInsets.only(top: 5.0),
+                                              child: Text('Usar minha localização atual', style: TextStyle(color: Colors.black87, fontWeight: FontWeight.bold ),),
+                                            ),
+                                            subtitle: Padding(
+                                              padding: const EdgeInsets.only(top: 2.0),
+                                              child: SizedBox(
+                                                width: MediaQuery.of(context).size.width * 0.8,
+                                                child: Row(
+                                                  children: <Widget>[
+                                                    Flexible(child: new Text( "Av. Castelo Branco, 570 - Lagoinha, Ribeirão Preto-SP" + "\nAp-32",
+                                                        style: TextStyle(
+                                                          fontSize: 13,
+                                                          color: Colors.grey[700],
+                                                        ),
+                                                      ), 
+                                                    ),                                                                
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            onTap: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) => NavBar(),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 19.0, right: 19.0, bottom: 12.0),
+                                      child: Container(
+                                        height: 85,
+                                        width: MediaQuery.of(context).size.width * 0.8,
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey[100],
+                                          borderRadius: new BorderRadius.circular(9.0)
+                                        ),
+                                        child: ListTile(
+                                          leading: Padding(
+                                            padding: const EdgeInsets.only(top: 15.0),
+                                            child: Icon(Icons.home),
+                                          ),
+                                          title: Padding(
+                                            padding: const EdgeInsets.only(top: 5.0),
+                                            child: Text('Casa', style: TextStyle(color: Colors.black87, fontWeight: FontWeight.bold ),),
+                                          ),
+                                          subtitle: Padding(
+                                            padding: const EdgeInsets.only(top: 2.0),
+                                            child: SizedBox(
+                                              width: MediaQuery.of(context).size.width * 0.8,
+                                              child: Row(
+                                                children: <Widget>[
+                                                  Flexible(child: new Text( "Av. Presidente Vargas, 1457 - Jardim Irajá, Ribeirão Preto-SP" + "\nAp-32",
+                                                      style: TextStyle(
+                                                        fontSize: 13,
+                                                        color: Colors.grey[700],
+                                                      ),
+                                                    ), 
+                                                  ),                                                                
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => NavBar(),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 19.0, right: 19.0, bottom: 12.0),
+                                      child: Container(
+                                        height: 85,
+                                        width: MediaQuery.of(context).size.width * 0.8,
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey[100],
+                                          borderRadius: new BorderRadius.circular(9.0)
+                                        ),
+                                        child: ListTile(
+                                          leading: Padding(
+                                            padding: const EdgeInsets.only(top: 15.0),
+                                            child: Icon(Icons.work),
+                                          ),
+                                          title: Padding(
+                                            padding: const EdgeInsets.only(top: 5.0),
+                                            child: Text('Trabalho', style: TextStyle(color: Colors.black87, fontWeight: FontWeight.bold ),),
+                                          ),
+                                          subtitle: Padding(
+                                            padding: const EdgeInsets.only(top: 2.0),
+                                            child: SizedBox(
+                                              width: MediaQuery.of(context).size.width * 0.8,
+                                              child: Row(
+                                                children: <Widget>[
+                                                  Flexible(child: new Text( "Av. Presidente Vargas, 1457 - Jardim Irajá, Ribeirão Preto-SP" + "\nAp-32",
+                                                      style: TextStyle(
+                                                        fontSize: 13,
+                                                        color: Colors.grey[700],
+                                                      ),
+                                                    ), 
+                                                  ),                                                                
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => NavBar(),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 19.0, right: 19.0, bottom: 12.0),
+                                      child: Container(
+                                        height: 85,
+                                        width: MediaQuery.of(context).size.width * 0.8,
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey[100],
+                                          borderRadius: new BorderRadius.circular(9.0)
+                                        ),
+                                        child: ListTile(
+                                          leading: Padding(
+                                            padding: const EdgeInsets.only(top: 15.0),
+                                            child: Icon(Icons.work),
+                                          ),
+                                          title: Padding(
+                                            padding: const EdgeInsets.only(top: 5.0),
+                                            child: Text('Trabalho', style: TextStyle(color: Colors.black87, fontWeight: FontWeight.bold ),),
+                                          ),
+                                          subtitle: Padding(
+                                            padding: const EdgeInsets.only(top: 2.0),
+                                            child: SizedBox(
+                                              width: MediaQuery.of(context).size.width * 0.8,
+                                              child: Row(
+                                                children: <Widget>[
+                                                  Flexible(child: new Text( "Av. Presidente Vargas, 1457 - Jardim Irajá, Ribeirão Preto-SP" + "\nAp-32",
+                                                      style: TextStyle(
+                                                        fontSize: 13,
+                                                        color: Colors.grey[700],
+                                                      ),
+                                                    ), 
+                                                  ),                                                                
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => NavBar(),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 19.0, right: 19.0, bottom: 12.0),
+                                      child: Container(
+                                        height: 85,
+                                        width: MediaQuery.of(context).size.width * 0.8,
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey[100],
+                                          borderRadius: new BorderRadius.circular(9.0)
+                                        ),
+                                        child: ListTile(
+                                          leading: Padding(
+                                            padding: const EdgeInsets.only(top: 15.0),
+                                            child: Icon(Icons.work),
+                                          ),
+                                          title: Padding(
+                                            padding: const EdgeInsets.only(top: 5.0),
+                                            child: Text('Trabalho', style: TextStyle(color: Colors.black87, fontWeight: FontWeight.bold ),),
+                                          ),
+                                          subtitle: Padding(
+                                            padding: const EdgeInsets.only(top: 2.0),
+                                            child: SizedBox(
+                                              width: MediaQuery.of(context).size.width * 0.8,
+                                              child: Row(
+                                                children: <Widget>[
+                                                  Flexible(child: new Text( "Av. Presidente Vargas, 1457 - Jardim Irajá, Ribeirão Preto-SP" + "\nAp-32",
+                                                      style: TextStyle(
+                                                        fontSize: 13,
+                                                        color: Colors.grey[700],
+                                                      ),
+                                                    ), 
+                                                  ),                                                                
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => NavBar(),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -180,6 +401,7 @@ class _LocalizacaoState extends State<Localizacao> {
                           ),
                         ],
                       ),
+                      
                     ],
                   ),
                 ),

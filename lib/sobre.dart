@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Sobre extends StatelessWidget {
@@ -73,7 +74,7 @@ class Sobre extends StatelessWidget {
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               image: DecorationImage(
-                                image: NetworkImage('assets/images/desenvolvedores/lucasProfile.jpeg'),
+                                image: AssetImage('assets/images/desenvolvedores/lucasProfile.jpeg'),
                                 fit: BoxFit.fill
                               ),
                             ),
@@ -92,7 +93,7 @@ class Sobre extends StatelessWidget {
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               image: DecorationImage(
-                                image: NetworkImage('assets/images/perfil.jpg'),
+                                image: AssetImage('assets/images/perfil.jpg'),
                                 fit: BoxFit.fill
                               ),
                             ),
@@ -151,16 +152,19 @@ class Sobre extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(
                               top: 26.0, left: 8, right: 8.0),
-                          child: Row(
-                            children: <Widget>[
-                              Center(
-                                  child: Text(
-                                      'O aplicativo foi desenvolvido com o intuito de você poder\n solicitar que uma pessoa vá até você e realize a lavagem no seu carro.\n Facilitando a vida das pessoas, pois a empresa realiza\n a lavagem no próprio local (se houver uma estrutura), ou também\npoderão levar o carro para a empresa e depois levar até você.',
-                                      style: GoogleFonts.lato(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black87))),
-                            ],
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.82,
+                            child: Row(
+                              children: <Widget>[
+                                   Flexible(child: new Text('O aplicativo foi desenvolvido com o intuito de você poder solicitar que uma pessoa vá até você e realize a lavagem no seu carro. Facilitando a vida das pessoas, pois a empresa realiza a lavagem no próprio local (se houver uma estrutura), ou também poderão levar o carro para a empresa e depois levar até você.',
+                                        style: GoogleFonts.lato(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black87),
+                                    ),
+                                  ),
+                              ],
+                            ),
                           ),
                         ),
                       ],

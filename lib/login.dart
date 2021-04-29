@@ -21,6 +21,7 @@ class _LoginState extends State<Login> {
       body: SingleChildScrollView(
         child: Center(
           child: Container(
+            height: MediaQuery.of(context).size.height / 1,
             constraints: BoxConstraints(maxWidth: 430),
             decoration: BoxDecoration(
                 image: DecorationImage(
