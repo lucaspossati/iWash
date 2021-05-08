@@ -179,7 +179,7 @@ class _PesquisarState extends State<Pesquisar> {
                             Row(
                               children: [
                                 Text(
-                                  'Carros',
+                                  'Veículos Aquáticos',
                                   style: GoogleFonts.lato(
                                     fontWeight: FontWeight.w500,
                                     color: Colors.black54,
