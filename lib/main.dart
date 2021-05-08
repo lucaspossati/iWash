@@ -142,7 +142,7 @@ class _NavBarState extends State<NavBar> {
               leading: Icon(Icons.logout),
               title: Text('Sair'),
               onTap: () {
-                Navigator.push(
+               Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => Login(),
@@ -150,7 +150,8 @@ class _NavBarState extends State<NavBar> {
                 );
               },
             ),
-          ],
+            
+          ],        
         ),
       ),
       body: PageView(
@@ -159,7 +160,24 @@ class _NavBarState extends State<NavBar> {
           Home(),
           Pesquisar(),
           Sobre(),
-
+          AlertDialog(
+            title: Text('Deseja sair do sistema?'),
+            content: Text('O usuário '+nomeUsuario.usuarioLogado+' será deslogado.'),
+            actions: [
+              TextButton(
+                style: TextButton.styleFrom(primary: Colors.red[700] ),
+                onPressed: () { },
+                child: Text('Cancelar'),
+              ),
+              TextButton(
+                style: TextButton.styleFrom(primary: Colors.blue[600] ),  
+                onPressed: () {
+                  Navigator.pushNamed(context, '/login');
+                },
+                child: Text('Sim'),
+              ),
+            ],
+          ),
         ],
       ),
       bottomNavigationBar: AnimatedBuilder(
@@ -187,8 +205,8 @@ class _NavBarState extends State<NavBar> {
                   backgroundColor: Colors.blue,
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.person),
-                  label: 'Perfil',
+                  icon: Icon(Icons.exit_to_app),
+                  label: 'Sair',
                   backgroundColor: Colors.blue,
                 ),
               ],
@@ -239,3 +257,4 @@ class Perfil extends StatelessWidget {
     );
   }
 }
+
