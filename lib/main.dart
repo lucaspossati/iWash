@@ -23,6 +23,7 @@ void main() {
       '/sobre': (context) => Sobre(),
       '/navegacao': (context) => NavBar(),
       '/localizacao': (context) => Localizacao(),
+
       // '/lojas': (context) => Lojas(
       //     logoEmpresa: 'assets/images/Wash/wash1.jpg',
       //     nomeLoja: 'Loja Automotiva',
@@ -166,7 +167,10 @@ class _NavBarState extends State<NavBar> {
             actions: [
               TextButton(
                 style: TextButton.styleFrom(primary: Colors.red[700] ),
-                onPressed: () { },
+                onPressed: () {
+                  Navigator.pushNamed(context, '/navegacao',
+                      arguments: nomeUsuario);
+                },
                 child: Text('Cancelar'),
               ),
               TextButton(

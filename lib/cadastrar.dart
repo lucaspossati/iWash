@@ -44,19 +44,21 @@ class _CadastrarState extends State<Cadastrar> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
-                Center(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Center(
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Container(
+                      height: 45,
+                      child: Center(
                         child: Text("Cadastre-se",
-                            style: GoogleFonts.lato(
-                                fontSize: 25, color: Colors.white)),
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.lato(
+                                      fontSize: 28, color: Colors.white)
+                            ),
                       ),
-                    ],
+
+
+                    ),
                   ),
-                ),
-                  
                 TextField(
                   focusNode: myFocusNode,
                   controller: _primeiroNome,

@@ -9,10 +9,13 @@ class LojaCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: CircleAvatar(
-        radius: 30,
-        backgroundColor: Colors.white,
-        backgroundImage: AssetImage(lojas.logoEmpresa),
+      leading: Padding(
+        padding: const EdgeInsets.only(top: 0.0),
+        child: CircleAvatar(
+          radius: 30,
+          backgroundColor: Colors.white,
+          backgroundImage: AssetImage(lojas.logoEmpresa),
+        ),
       ),
       title: Row(children: [
         Text(lojas.nomeLoja,

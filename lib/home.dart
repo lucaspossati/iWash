@@ -154,52 +154,54 @@ class _HomeState extends State<Home> {
                   ),
                   Container(
                     color: Colors.white,
-                    margin: EdgeInsets.only(top: 18),
-                    padding: EdgeInsets.only(left: 12),
+                    margin: EdgeInsets.only(top: 16),
+                    padding: EdgeInsets.only(left: 8),
                     alignment: Alignment.topLeft,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Container(
-                            margin: EdgeInsets.only(bottom: 10),
                             child: Text(
                               'Lojas',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 17),
                             )),
                         Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 20),
+
                           child: Column(
                             children: <Widget>[
-                              Form(
-                                key: _formKey,
-                                child: Row(
-                                  children: <Widget>[
-                                    Expanded(
-                                        child: TextFormField(
-                                      style: TextStyle(
-                                          fontSize: 24, color: Colors.black38),
-                                      decoration: InputDecoration(
-                                          hintText: "Pesquise sua loja",
-                                          hintStyle: TextStyle(fontSize: 18)),
-                                      keyboardType: TextInputType.text,
-                                    )),
-                                    Container(
-                                        margin: EdgeInsets.only(left: 20),
-                                        child: ElevatedButton(
-                                            child: Icon(Icons.search),
-                                            onPressed: () {
-                                              print("Clicado");
-                                            },
-                                            style: ButtonStyle(
-                                              backgroundColor:
-                                                  MaterialStateProperty.all<
-                                                      Color>(Colors.blue),
-                                            )))
-                                  ],
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 16.0),
+                                child: Form(
+                                  key: _formKey,
+                                  child: Row(
+                                    children: <Widget>[
+                                      Expanded(
+                                          child: TextFormField(
+                                        style: TextStyle(
+                                            fontSize: 24, color: Colors.black38),
+                                        decoration: InputDecoration(
+                                            hintText: "Pesquise sua loja",
+                                            hintStyle: TextStyle(fontSize: 18)),
+                                        keyboardType: TextInputType.text,
+                                      )),
+                                      Container(
+
+                                          child: ElevatedButton(
+                                              child: Icon(Icons.search),
+                                              onPressed: () {
+                                                print("Clicado");
+                                              },
+                                              style: ButtonStyle(
+                                                backgroundColor:
+                                                    MaterialStateProperty.all<
+                                                        Color>(Colors.blue),
+                                              )))
+                                    ],
+                                  ),
                                 ),
                               ),
+
                               SizedBox(
                                 child: ListView.builder(
                                   scrollDirection: Axis.vertical,
