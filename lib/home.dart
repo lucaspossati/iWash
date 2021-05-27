@@ -20,7 +20,8 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     // final UsuarioLogado nomeUsuario = ModalRoute.of(context).settings.arguments;
-
+  
+  
     List<Lojas> _listLojas = [];
     _listLojas = [];
     _listLojas.add(Lojas(

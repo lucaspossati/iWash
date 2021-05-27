@@ -1,7 +1,14 @@
+import 'dart:convert';
+import 'dart:developer';
+import 'dart:html';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iWash/home.dart';
+import 'package:http/http.dart' as http;
+import 'package:iWash/model/usuarios.dart';
 
 import 'cadastrar.dart';
 
@@ -13,7 +20,31 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   var _txtSenha = TextEditingController();
   var _usuarioLogado = TextEditingController();
+  List<Usuarios> _usuarios;
   FocusNode myFocusNode = new FocusNode();
+  
+  //Autenticação na tela de login
+  Future validarLogin(var login, var senha) async {
+
+    final String logarUrl = "https://localhost:44311/api/Usuarios/loginUsuario";    
+
+    var response = await http.post(logarUrl, body: {
+      'login' : login,
+      'senha' : senha,
+    });
+    
+    if(response != null){
+      var responseDecode = json.decode(response.body);
+      return responseDecode;
+    }
+    else{
+      return null;
+    }
+    
+  }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -84,6 +115,8 @@ class _LoginState extends State<Login> {
                   obscureText: true,
 
                   controller: _txtSenha,
+                  
+                  
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.lock, color: Colors.white70), labelText: 'Senha',
                   labelStyle: TextStyle(
@@ -100,14 +133,26 @@ class _LoginState extends State<Login> {
                     child: ElevatedButton.icon(
                       label: Text('Entrar'),
                       icon: Icon(Icons.login, color: Colors.white),
-                      onPressed: () {
-                        // Navigator.pushNamed(context, '/home');
-                        setState(() {
-                          var nomeUsuario = UsuarioLogado(_usuarioLogado.text);
+                      onPressed: () async{
+                        await validarLogin(_usuarioLogado.text, _txtSenha.text).then((value) {
+                          setState(() {
+                            var nomeUsuario = UsuarioLogado(value["PrimeiroNome"]);
+                            var senha = _usuarioLogado.text;
+                         
+                            print(nomeUsuario);
 
-                          Navigator.pushNamed(context, '/navegacao',
-                              arguments: nomeUsuario);
+                            if(nomeUsuario != null){
+                              Navigator.pushNamed(context, '/navegacao', arguments: nomeUsuario);
+                            }
+                            else{
+
+                            }
+                            
+                          });
                         });
+                       
+                        //Navigator.pushNamed(context, '/navegacao');
+                       
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Colors.red[500],
@@ -245,8 +290,37 @@ class _LoginState extends State<Login> {
   }
 }
 
+Future verificarUsuario(var login, var senha) async{
+  var url = 'https://localhost:44311/api/Usuarios/loginUsuario';
+  var retorno = await http.get(url);
+  var usuariosAPI = jsonDecode(retorno.body);
+  print(usuariosAPI.login);
+
+  if((login == usuariosAPI['login']) && (senha == usuariosAPI['senha'])){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+
+Future<http.Response> validarLoginOld(var login, var senha) {
+  return http.post(
+    Uri.parse('https://localhost:44311/api/Usuarios/loginUsuario'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(<String, String>{
+      'login': login,
+      'senha': senha,
+    }),
+  );
+}
+
+
 class UsuarioLogado {
    
   String usuarioLogado = '';
   UsuarioLogado(this.usuarioLogado);
 }
+
