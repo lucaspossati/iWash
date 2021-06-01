@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'dart:html';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iWash/home.dart';
 import 'package:http/http.dart' as http;
 import 'package:iWash/model/usuarios.dart';
+import 'package:sweetalert/sweetalert.dart';
 
 import 'cadastrar.dart';
 
@@ -18,9 +18,9 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+
   var _txtSenha = TextEditingController();
   var _usuarioLogado = TextEditingController();
-  List<Usuarios> _usuarios;
   FocusNode myFocusNode = new FocusNode();
   
   //Autenticação na tela de login
@@ -29,22 +29,37 @@ class _LoginState extends State<Login> {
     final String logarUrl = "https://localhost:44311/api/Usuarios/loginUsuario";    
 
     var response = await http.post(logarUrl, body: {
-      'login' : login,
+      'email' : login,
       'senha' : senha,
     });
     
-    if(response != null){
+    if(response.body != "null"){
       var responseDecode = json.decode(response.body);
       return responseDecode;
+
+     
     }
     else{
       return null;
     }
     
+    
   }
 
+  Future verificarEnderecoExistente(int idEndereco) async {
 
+    final String enderecoExistente = "https://localhost:44311/api/Enderecos/existeEndereco";    
 
+    var response = await http.post(enderecoExistente, body: {"UsuariosId":idEndereco.toString()});
+    
+    if(response.body == "0"){
+      return "Direcionar para tela de endereço";
+    }
+    else{
+      return "Direcionar para tela principal";
+    }
+    
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,12 +100,6 @@ class _LoginState extends State<Login> {
                 Padding(
                   padding: const EdgeInsets.only(top: 18.0),
                   child: TextFormField(
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Por favor, digite um e-mail ou usuário!';
-                      }
-                      return null;
-                    },
 
                     style: TextStyle(color: Colors.white),
                     textAlign: TextAlign.center,
@@ -130,28 +139,41 @@ class _LoginState extends State<Login> {
                   child: SizedBox(
                     width: double.infinity,
                     height: 37,
+                    
                     child: ElevatedButton.icon(
                       label: Text('Entrar'),
                       icon: Icon(Icons.login, color: Colors.white),
+                      
                       onPressed: () async{
                         await validarLogin(_usuarioLogado.text, _txtSenha.text).then((value) {
+                          
                           setState(() {
-                            var nomeUsuario = UsuarioLogado(value["PrimeiroNome"]);
-                            var senha = _usuarioLogado.text;
-                         
-                            print(nomeUsuario);
 
-                            if(nomeUsuario != null){
-                              Navigator.pushNamed(context, '/navegacao', arguments: nomeUsuario);
+                            
+
+                            if(value != null){
+                              int idUsuario = value["Id"];
+                              var dadosUsuario = UsuarioLogado(value["PrimeiroNome"], value["Id"].toString());
+                              
+                              
+
+                              verificarEnderecoExistente(idUsuario).then((value){
+                                if(value == "Direcionar para tela de endereço" ){
+                                  Navigator.pushNamed(context, '/cadastrarEndereco', arguments: dadosUsuario);
+                                }
+                                else{
+                                  Navigator.pushNamed(context, '/navegacao', arguments: dadosUsuario);
+                                }
+                              });
+
                             }
                             else{
-
+                              SweetAlert.show(context,title: "E-mail ou senha inválido!", style: SweetAlertStyle.error);
                             }
-                            
+
                           });
                         });
-                       
-                        //Navigator.pushNamed(context, '/navegacao');
+                      
                        
                       },
                       style: ElevatedButton.styleFrom(
@@ -164,23 +186,7 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.all(8.0),
-                //   child: SizedBox(
-                //     width: double.infinity,
-                //     height: 33,
-                //     child: ElevatedButton.icon(
-                //       label: Text('Esqueci a senha'),
-                //       icon: Icon(Icons.password),
-                //       onPressed: () {
-                //         Navigator.pushNamed(context, '/esqueceSenha');
-                //       },
-                //       style: ElevatedButton.styleFrom(
-                //           primary: Colors.red[500],
-                //           textStyle: TextStyle(fontSize: 15)),
-                //     ),
-                //   ),
-                // ),
+               
                 Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: SizedBox(
@@ -258,29 +264,7 @@ class _LoginState extends State<Login> {
                     },
                   ),
                 ),
-                // if(msg?.primeiroNome != null){
-                //   AlertDialog(
-                //   title: Text("Usuário cadastrado com sucesso!"),
-                //   content: Text(msg?.primeiroNome ?? '',
-                //       style: TextStyle(fontSize: 15)),
-
-                //   actions: [
-                //     ElevatedButton(
-                //       child: Text("Sim"),
-                //       onPressed: () {
-                //         Navigator.pushNamed(context, '/navegacao');
-                //       },
-                //     ),
-                //     ElevatedButton(
-                //       child: Text("Não"),
-                //       onPressed: () {
-                //         Navigator.pushNamed(context, '/login');
-                //       },
-                //     ),
-                //   ],
-                //   elevation: 24.0,
-                // ),
-                // },
+                
               ],
             ),
           ),
@@ -321,6 +305,8 @@ Future<http.Response> validarLoginOld(var login, var senha) {
 class UsuarioLogado {
    
   String usuarioLogado = '';
-  UsuarioLogado(this.usuarioLogado);
+  String idUsuarioLogado = '';
+
+  UsuarioLogado(this.usuarioLogado, this.idUsuarioLogado);
 }
 

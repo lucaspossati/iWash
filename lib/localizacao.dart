@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
+import 'package:http/http.dart' as http;
+import 'package:iWash/login.dart';
+import 'package:sweetalert/sweetalert.dart';
 
 import 'main.dart';
 
@@ -22,8 +26,9 @@ class _LocalizacaoState extends State<Localizacao> {
   Position currentPosition;
   var geoLocator = Geolocator();
 
-  double lat = 37.4250635;
-  double long = -122.0930383;
+  //Vienna Austria
+  double lat = 48.220778;
+  double long = 16.3100205;
 
 
   void _onMapCreated(GoogleMapController controller){
@@ -37,6 +42,7 @@ class _LocalizacaoState extends State<Localizacao> {
     Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     currentPosition = position;
 
+    
     LatLng latLngPosition = LatLng(position.latitude, position.longitude);
 
     CameraPosition cameraPosition = new CameraPosition(target: latLngPosition, zoom: 17);
@@ -50,13 +56,16 @@ class _LocalizacaoState extends State<Localizacao> {
       lat = position.latitude;
       _locationMessage = "${position.latitude}, ${position.longitude}";
     });
-  }
 
+  }
 
 
 
   @override
   Widget build(BuildContext context) {
+
+    final UsuarioLogado dadosUsuario = ModalRoute.of(context).settings.arguments;
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Endereços")
@@ -130,17 +139,31 @@ class _LocalizacaoState extends State<Localizacao> {
                                       margin: EdgeInsets.only(top: 18),
                                       padding: EdgeInsets.only(left: 21),
                                       alignment: Alignment.topLeft,
-                                      constraints: BoxConstraints( maxHeight: 150),
+                                      constraints: BoxConstraints( maxHeight: 90),
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: <Widget>[
                                           Container(
+                                            height: 60,
+                                            width: MediaQuery.of(context).size.width *0.38,
                                               margin: EdgeInsets.only(bottom: 10),
-                                              child: Text(
-                                                'Buscar',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold, fontSize: 17),
-                                              )),
+                                              child: ElevatedButton.icon(
+                                                label: Text('Adicionar'),
+                                                icon: Icon(Icons.add, color: Colors.white),
+                                                
+                                                onPressed: () {
+                                                  Navigator.pushNamed(context, '/cadastrarEndereco', arguments: dadosUsuario);
+                                                },
+                                                          
+                                                style: ElevatedButton.styleFrom(
+                                                  primary: Colors.blue,
+                                                  textStyle: TextStyle(fontSize: 15),
+                                                  shape: new RoundedRectangleBorder(
+                                                    borderRadius: new BorderRadius.circular(45.0),
+                                                  ),
+                                                ),
+                                              ),
+                                          ),
                                           Container(
                                             padding: EdgeInsets.only(top: 11.0, left: 21.0, right: 21.0),
                                             child: Column(
@@ -151,7 +174,9 @@ class _LocalizacaoState extends State<Localizacao> {
                                                     children: <Widget>[
                                                       Expanded(
                                                           child: TextField(
-                                                            onSubmitted: (val){
+                                                            onSubmitted: (val) async{
+
+                                                  
                                                               lat = -21.2187885;
                                                               long = -47.8257621;
 

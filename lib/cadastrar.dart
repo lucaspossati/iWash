@@ -1,6 +1,13 @@
+import 'dart:convert';
+
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
+import 'package:sweetalert/sweetalert.dart';
+
 
 class Cadastrar extends StatefulWidget {
   @override
@@ -9,17 +16,76 @@ class Cadastrar extends StatefulWidget {
 
 class _CadastrarState extends State<Cadastrar> {
   var _primeiroNome = TextEditingController();
+  var _sobrenome = TextEditingController();
+  var _email = TextEditingController();
+  var _cpf = TextEditingController();
+  var _senha = TextEditingController();
+  var _confirmaSenha = TextEditingController();
+
+  var _datadeNascimento = TextEditingController();
+  var carregandoAPI = false;
+
+  var dropdownValue = 'N';
   FocusNode myFocusNode = new FocusNode();
+
+
+  Future cadastrarUsuario(var primeiroNome, var sobrenome, var email, var cpf,
+      var senha , var confirmaSenha, var sexo, var datadeNascimento) async {
+
+
+    final String cadastrarUsuarioUrl = "https://localhost:44311/api/Usuarios/alterarUsuario";  
+
+
+    carregandoAPI = true;
+    //Ajuda do professor
+    //CircularProgressIndicator(); 
+
+    if(senha != confirmaSenha){
+      return "Senhas diferentes";
+    } 
+
+    var response = await http.post(cadastrarUsuarioUrl, body: {
+
+      "PrimeiroNome": primeiroNome,
+      "Sobrenome": sobrenome,
+      "Email": email,
+      "CPF": cpf,
+      "Senha": senha,
+      "Sexo": sexo,
+      
+      "DatadeNascimento": datadeNascimento,
+  
+    });
+
+    print(response.body);
+    
+    if(response.body == "0"){
+      var responseDecode = json.decode(response.body);
+      return responseDecode;
+    }
+    else if(response.body == "2"){
+      return response.body;
+    }
+    else{
+      return null;
+    }
+    
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // if(carregandoAPI == true){
+      //             child: CircularProgressIndicator();
+      
       body: SingleChildScrollView(
+        
         child: Center(
           child: Container(
-            constraints: BoxConstraints(maxWidth: 430),
+            width: double.infinity,
+            //constraints: BoxConstraints(maxWidth: 430),
             decoration: BoxDecoration(
-              color: Colors.blue.shade900,
+              color: Colors.white,
               // borderRadius: new BorderRadius.circular(26.0)
             ),
 
@@ -31,6 +97,8 @@ class _CadastrarState extends State<Cadastrar> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                
+                
                 SizedBox(
                   width: 150,
                   child: ClipRRect(
@@ -44,88 +112,270 @@ class _CadastrarState extends State<Cadastrar> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: Container(
-                      height: 45,
-                      child: Center(
-                        child: Text("Cadastre-se",
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.lato(
-                                      fontSize: 28, color: Colors.white)
-                            ),
-                      ),
-
-
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Container(
+                    height: 45,
+                    child: Center(
+                      child: Text("Cadastre-se",
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.lato(
+                                    fontSize: 28, color: Colors.blue)
+                          ),
                     ),
                   ),
-                TextField(
-                  focusNode: myFocusNode,
-                  controller: _primeiroNome,
-                  decoration: InputDecoration(labelText: 'Nome', labelStyle: TextStyle(
-                      color: myFocusNode.hasFocus ? Colors.white : Colors.white54
-                  )),
                 ),
-                SizedBox(height: 5),
-                TextField(
-                  decoration: InputDecoration(labelText: 'Sobrenome', labelStyle: TextStyle(
-                      color: myFocusNode.hasFocus ? Colors.white : Colors.white54)),
+                Row(
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.45,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 8, right: 8),
+                        child: TextField(
+                          
+                          style: TextStyle(color: Colors.black45),
+                          textAlign: TextAlign.center,
+                          controller: _primeiroNome,
+
+                          decoration: InputDecoration(
+                            labelText: 'Nome',
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(width: 3, color: Colors.blue[100]),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(width: 3, color: Colors.blue),
+                                borderRadius: BorderRadius.circular(15),
+                              )
+                          ),
+                        ),
+
+                      ),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.45,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 8, right: 8),
+                        child: TextField(
+                          
+                          style: TextStyle(color: Colors.black45),
+                          textAlign: TextAlign.center,
+                          controller: _sobrenome,
+
+                          decoration: InputDecoration(
+                            labelText: 'Sobrenome',
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(width: 3, color: Colors.blue[100]),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(width: 3, color: Colors.blue),
+                                borderRadius: BorderRadius.circular(15),
+                              )
+                          ),
+                        ),
+
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(height: 5),
-                TextField(
-                  decoration: InputDecoration(labelText: 'E-mail', labelStyle: TextStyle(
-                      color: myFocusNode.hasFocus ? Colors.white : Colors.white54)),
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.92,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 8, right: 8),
+                    child: TextField(
+                      
+                      style: TextStyle(color: Colors.black45),
+                      textAlign: TextAlign.center,
+                      controller: _email,
+                      
+                      decoration: InputDecoration(
+                        labelText: 'Email',
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(width: 3, color: Colors.blue[100]),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(width: 3, color: Colors.blue),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                      ),
+                    ),
+
+                  ),
                 ),
-                SizedBox(height: 5),
-                TextField(
-                  decoration: InputDecoration(labelText: 'CPF', labelStyle: TextStyle(
-                      color: myFocusNode.hasFocus ? Colors.white : Colors.white54)),
+                SizedBox(
+                  
+                  child: DropdownButton(
+                    style: TextStyle(color: Colors.black45),
+                    
+                    value: dropdownValue,
+                    items: [
+                      
+                      DropdownMenuItem(
+                        child: Text("Sexo"),
+                        value: 'N',
+                      ),
+                      DropdownMenuItem(
+                        child: Text("Masculino"),
+                        value: 'M',
+                      ),
+                      DropdownMenuItem(
+                        child: Text("Feminino"),
+                        value: 'F'
+                      ),
+                    ],
+                    onChanged: (value) {
+                      setState(() {
+                        dropdownValue = value;
+                      });
+                    },
+                    
+                  ),
+                  width: double.infinity,
                 ),
-                SizedBox(height: 5),
-                TextField(
-                  decoration: InputDecoration(labelText: 'Data de Nascimento', labelStyle: TextStyle(
-                      color: myFocusNode.hasFocus ? Colors.white : Colors.white54
-                  )),
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.92,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 8, right: 8),
+                    child: TextField(
+                      
+                      style: TextStyle(color: Colors.black45),
+                      textAlign: TextAlign.center,
+                      controller: _email,
+                      
+                      decoration: InputDecoration(
+                        labelText: 'Email',
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(width: 3, color: Colors.blue[100]),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(width: 3, color: Colors.blue),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          
+                      ),
+                    ),
+
+                  ),
                 ),
-                SizedBox(height: 5),
-                TextField(
-                  decoration: InputDecoration(labelText: 'CEP', labelStyle: TextStyle(
-                  color: myFocusNode.hasFocus ? Colors.white : Colors.white54
-                  )),
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.92,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 8, right: 8),
+                    child: TextField(
+                      
+                      style: TextStyle(color: Colors.black45),
+                      textAlign: TextAlign.center,
+                      controller: _cpf,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        CpfInputFormatter(),
+                      ],
+                      decoration: InputDecoration(
+                        labelText: 'CPF',
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(width: 3, color: Colors.blue[100]),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(width: 3, color: Colors.blue),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          
+                      ),
+                    ),
+
+                  ),
                 ),
-                SizedBox(height: 5),
-                TextField(
-                  decoration: InputDecoration(labelText: 'Endereço', labelStyle: TextStyle(
-                      color: myFocusNode.hasFocus ? Colors.white : Colors.white54
-                  )),
+
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.92,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 8, right: 8),
+                    child: TextField(
+                      
+                      style: TextStyle(color: Colors.black45),
+                      textAlign: TextAlign.center,
+                      controller: _datadeNascimento,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        DataInputFormatter(),
+                      ],  
+                      decoration: InputDecoration(
+                        labelText: 'Data de Nascimento',
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(width: 3, color: Colors.blue[100]),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(width: 3, color: Colors.blue),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          
+                      ),
+                    ),
+
+                  ),
                 ),
-                SizedBox(height: 5),
-                TextField(
-                  decoration: InputDecoration(labelText: 'Nº', labelStyle: TextStyle(
-                      color: myFocusNode.hasFocus ?Colors.white : Colors.white54
-                  )),
+                
+                Row(
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.45,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 8, right: 8),
+                        child: TextField(
+                          obscureText: true,
+                          style: TextStyle(color: Colors.black45),
+                          textAlign: TextAlign.center,
+                          controller: _senha,
+
+                          decoration: InputDecoration(
+                            labelText: 'Senha',
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(width: 3, color: Colors.blue[100]),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(width: 3, color: Colors.blue),
+                                borderRadius: BorderRadius.circular(15),
+                              )
+                          ),
+                        ),
+
+                      ),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.45,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 8, right: 8),
+                        child: TextField(
+                          obscureText: true,
+                          style: TextStyle(color: Colors.black45),
+                          textAlign: TextAlign.center,
+                          controller: _confirmaSenha,
+
+                          decoration: InputDecoration(
+                            labelText: 'Confirmar Senha',
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(width: 3, color: Colors.blue[100]),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(width: 3, color: Colors.blue),
+                                borderRadius: BorderRadius.circular(15),
+                              )
+                          ),
+                        ),
+
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(height: 5),
-                TextField(
-                  decoration: InputDecoration(labelText: 'Cidade', labelStyle: TextStyle(
-                      color: myFocusNode.hasFocus ? Colors.white : Colors.white54
-                  )),
-                ),
-                SizedBox(height: 5),
-                TextField(
-                  obscureText: true,
-                  decoration: InputDecoration(labelText: 'Senha', labelStyle: TextStyle(
-                      color: myFocusNode.hasFocus ? Colors.white : Colors.white54
-                  )),
-                ),
-                SizedBox(height: 5),
-                TextField(
-                  obscureText: true,
-                  decoration: InputDecoration(labelText: 'Confirmar Senha', labelStyle: TextStyle(
-                      color: myFocusNode.hasFocus ? Colors.white : Colors.white54
-                  )),
-                ),
-                SizedBox(height: 5),
+                
+               
                 Padding(
                   padding: const EdgeInsets.only(top: 22.0, left: 33, right: 33),
                   child: SizedBox(
@@ -134,17 +384,36 @@ class _CadastrarState extends State<Cadastrar> {
                     child: ElevatedButton.icon(
                       label: Text('Cadastrar'),
                       icon: Icon(Icons.login),
-                      onPressed: () {
-                        // Navigator.pushNamed(context, '/login');
-                        //
+                     
+                      onPressed: () async{
+                        
+                        await cadastrarUsuario( _primeiroNome.text, _sobrenome.text, _email.text,
+                          _cpf.text, _senha.text, _confirmaSenha.text, dropdownValue, _datadeNascimento.text).then((value) {
+                          
+                          if(value == 0){
+                            SweetAlert.show(context, title: "Usuário cadastrado com sucesso!");
+                            Navigator.pushNamed(context, '/login');
+                          }
+                          else if(value == 2){
 
-                        setState(() {
-                          var msg = Mensagem(_primeiroNome.text);
+                            SweetAlert.show(context,title: "E-mail já cadastrado no sistema!", style: SweetAlertStyle.error);
+                            
+                          }
 
-                          Navigator.pushNamed(context, '/login',
-                              arguments: msg);
+                          else if(value == "Senhas diferentes"){
+
+                            SweetAlert.show(context,title: "Senha Inválida!",subtitle: "As senhas são divergentes.", style: SweetAlertStyle.error);
+                            
+                          }
+                          
+                          else{
+                            SweetAlert.show(context,title: "Erro!",subtitle: "Contate a equipe de suporte.", style: SweetAlertStyle.error);
+                          }
                         });
+                       
+                       
                       },
+
                       style: ElevatedButton.styleFrom(
                         primary: Colors.red[500],
                         textStyle: TextStyle(fontSize: 15),
