@@ -66,7 +66,7 @@ class _CadastrarEnderecoState extends State<CadastrarEndereco> {
     
   }
 
-  Future cadastrarEndereco( var cep, var logradouro, var numero, var complemento, var bairro, var localidade, var uf, var idUsuario, 
+  Future cadastrarEndereco(var id, var cep, var logradouro, var numero, var complemento, var bairro, var localidade, var uf, var idUsuario, 
     var pontoReferencia, var titulo) async {
 
     if(titulo == ""){
@@ -77,6 +77,7 @@ class _CadastrarEnderecoState extends State<CadastrarEndereco> {
     
     http.Response response;
     response = await http.post(urlApi, body: {
+      "Id": id,
       "Titulo": titulo,
       "Rua": logradouro,
       "Numero": numero,
@@ -100,6 +101,20 @@ class _CadastrarEnderecoState extends State<CadastrarEndereco> {
     
   }
 
+  Future getEnderecoUsuario( var idEndereco) async {
+    
+    final String urlApi = "https://localhost:44311/api/Enderecos/obterEnderecoId/";  
+     
+    http.Response response;
+
+    response = await http.get(urlApi + idEndereco);
+
+    var retornoEnderecos = json.decode(response.body);
+    
+    return retornoEnderecos;
+    
+  }
+
   void _onMapCreated(GoogleMapController controller){
     mapController = controller;
   }
@@ -110,6 +125,28 @@ class _CadastrarEnderecoState extends State<CadastrarEndereco> {
 
     
     final UsuarioLogado dadosUsuario = ModalRoute.of(context).settings.arguments;
+
+    if(dadosUsuario.idEndereco != ''){
+      getEnderecoUsuario(dadosUsuario.idEndereco.toString()).then((value) {
+        _cep.text = value['CEP'];
+        _logradouro.text = value['Rua'];
+        _numero.text = value['Numero'].toString();
+        _complemento.text = value['Complemento'];
+        _bairro.text = value['Bairro'];
+        _localidade.text = value['Cidade'];
+        _uf.text = value['Estado'];
+        _pontoReferencia.text = value['PontoReferencia'];
+
+        if(value['Titulo'] == "Trabalho"){
+          checkedTrabalho = true;
+          checkedCasa = false;
+        }
+        else{
+          checkedCasa = true;
+          checkedTrabalho = false;
+        }
+      });
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -242,9 +279,10 @@ class _CadastrarEnderecoState extends State<CadastrarEndereco> {
                                                       _bairro.text = value["bairro"];
                                                       _localidade.text = value["localidade"];
                                                       _uf.text = value["uf"];
-                                                      
+                                                      print(dadosUsuario.idEndereco);
                                                       
                                                     });},
+
                                                     label: Text('Buscar'),
                                                     icon: Center(child: Icon(Icons.search)),
 
@@ -430,12 +468,12 @@ class _CadastrarEnderecoState extends State<CadastrarEndereco> {
                                           Row(
                                             children: [
                                               Container(
-                                                width: MediaQuery.of(context).size.width * 0.90,
+                                                width: MediaQuery.of(context).size.width * 0.93,
                                                 child: Padding(
                                                   padding: const EdgeInsets.only(top: 8, right: 8),
                                                   child: TextField(
                                                     
-                                                    style: TextStyle(color: Colors.black45),
+                                                    style: TextStyle(color: Colors.black54),
                                                     textAlign: TextAlign.center,
                                                     controller: _pontoReferencia,
 
@@ -564,11 +602,11 @@ class _CadastrarEnderecoState extends State<CadastrarEndereco> {
                                               height: 37,
                                               
                                               child: ElevatedButton.icon(
-                                                label: Text('Continuar'),
-                                                icon: Icon(Icons.navigate_next, color: Colors.white),
+                                                label: Text('Salvar'),
+                                                icon: Icon(Icons.save, color: Colors.white),
                                                 
                                                 onPressed: () async{
-                                                  await cadastrarEndereco(_cep.text, _logradouro.text, _numero.text, _complemento.text,
+                                                  await cadastrarEndereco(dadosUsuario.idEndereco, _cep.text, _logradouro.text, _numero.text, _complemento.text,
                                                    _bairro.text, _localidade.text, _uf.text, dadosUsuario.idUsuarioLogado, _pontoReferencia.text, titulo).then((value) {
                                                     
                                                       if(value != null){

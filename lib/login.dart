@@ -122,10 +122,7 @@ class _LoginState extends State<Login> {
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.white),
                   obscureText: true,
-
                   controller: _txtSenha,
-                  
-                  
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.lock, color: Colors.white70), labelText: 'Senha',
                   labelStyle: TextStyle(
@@ -153,10 +150,8 @@ class _LoginState extends State<Login> {
 
                             if(value != null){
                               int idUsuario = value["Id"];
-                              var dadosUsuario = UsuarioLogado(value["PrimeiroNome"], value["Id"].toString());
+                              var dadosUsuario = UsuarioLogado(value["PrimeiroNome"], value["Id"].toString(), "");
                               
-                              
-
                               verificarEnderecoExistente(idUsuario).then((value){
                                 if(value == "Direcionar para tela de endereço" ){
                                   Navigator.pushNamed(context, '/cadastrarEndereco', arguments: dadosUsuario);
@@ -306,7 +301,8 @@ class UsuarioLogado {
    
   String usuarioLogado = '';
   String idUsuarioLogado = '';
+  String idEndereco = '';
 
-  UsuarioLogado(this.usuarioLogado, this.idUsuarioLogado);
+  UsuarioLogado(this.usuarioLogado, this.idUsuarioLogado, this.idEndereco);
 }
 
