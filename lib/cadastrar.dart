@@ -32,6 +32,30 @@ class _CadastrarState extends State<Cadastrar> {
   Future cadastrarUsuario(var primeiroNome, var sobrenome, var email, var cpf,
       var senha , var confirmaSenha, var sexo, var datadeNascimento) async {
 
+    if(primeiroNome == null || primeiroNome == ""){
+      return "Preencha o nome";
+    }
+
+    if(sobrenome == null || sobrenome == ""){
+      return "Preencha o sobrenome";
+    }
+
+     if(email == null || email == ""){
+      return "Preencha o e-mail";
+    }
+
+     if(cpf == null || cpf == ""){
+      return "Preencha o cpf";
+    }
+
+     if(sexo == null || sexo == "" || sexo == "N"){
+      SweetAlert.show(context, title: "Preencha o nome", style: SweetAlertStyle.error);
+      return "Preencha o sexo";
+    }
+
+     if(datadeNascimento == null || datadeNascimento == ""){
+      return "Preencha a data de nascimento";
+    }
 
     final String cadastrarUsuarioUrl = "https://localhost:44311/api/Usuarios/alterarUsuario";  
 
@@ -234,32 +258,7 @@ class _CadastrarState extends State<Cadastrar> {
                   ),
                   width: double.infinity,
                 ),
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.92,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 8, right: 8),
-                    child: TextField(
-                      
-                      style: TextStyle(color: Colors.black45),
-                      textAlign: TextAlign.center,
-                      controller: _email,
-                      
-                      decoration: InputDecoration(
-                        labelText: 'Email',
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(width: 3, color: Colors.blue[100]),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(width: 3, color: Colors.blue),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          
-                      ),
-                    ),
-
-                  ),
-                ),
+                
                 Container(
                   width: MediaQuery.of(context).size.width * 0.92,
                   child: Padding(
@@ -405,7 +404,26 @@ class _CadastrarState extends State<Cadastrar> {
                             SweetAlert.show(context,title: "Senha Inválida!",subtitle: "As senhas são divergentes.", style: SweetAlertStyle.error);
                             
                           }
+                          else if(value == "Preencha o nome"){
+                            SweetAlert.show(context, title: "Preencha o nome", style: SweetAlertStyle.error);
+                          }
+
+                          else if(value == "Preencha o sobrenome"){
+                            SweetAlert.show(context, title: "Preencha o sobrenome", style: SweetAlertStyle.error);
+                          }
+
+                          else if(value == "Preencha o e-mail"){
+                            SweetAlert.show(context, title: "Preencha o e-mail", style: SweetAlertStyle.error);
+                          }
+
+                          else if(value == "Preencha o cpf"){
+                            SweetAlert.show(context, title: "Preencha o CPF", style: SweetAlertStyle.error);
+                          }
                           
+                          else if(value == "Preencha a data de nascimento"){
+                            SweetAlert.show(context, title: "Preencha a data de nascimento", style: SweetAlertStyle.error);
+                          }
+
                           else{
                             SweetAlert.show(context,title: "Erro!",subtitle: "Contate a equipe de suporte.", style: SweetAlertStyle.error);
                           }
