@@ -7,6 +7,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:iWash/login.dart';
 import 'package:iWash/model/enderecos.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:sweetalert/sweetalert.dart';
 
 import 'main.dart';
@@ -187,7 +188,6 @@ class _LocalizacaoState extends State<Localizacao> {
                                                 label: Text('Adicionar'),
                                                 icon: Icon(Icons.add, color: Colors.white),
                                                 onPressed: () {
-                                                  SweetAlert.show(context, subtitle: "Carregando...", style: SweetAlertStyle.loading);
                                                   dadosUsuario.idEndereco = '';
                                                   Navigator.pushNamed(context, '/cadastrarEndereco', arguments: dadosUsuario);
                                                 },       
@@ -309,7 +309,10 @@ class _LocalizacaoState extends State<Localizacao> {
                                                                     ),
                                                                     onPressed: () async{
                                                                       await deletarEndereco(snapshot.data[index]["Id"]);
-                                                                      SweetAlert.show(context, subtitle: "Endereço deletado com sucesso!", style: SweetAlertStyle.success);
+                                                                      
+                                                                      var alertStyle = AlertStyle(animationDuration: Duration(milliseconds: 2500), animationType: AnimationType.fromTop, isCloseButton: false);
+
+                                                                      Alert(context: context, style: alertStyle, type: AlertType.success, title: "Sucesso!", desc: "Endereço deletado com sucesso!").show();
                                                                       setState(() {});
                                                                       // SweetAlert.show(context,
                                                                       //                 title: "Tem certeza que deseja excluir?",
