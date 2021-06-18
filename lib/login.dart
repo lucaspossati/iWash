@@ -28,6 +28,8 @@ class _LoginState extends State<Login> {
 
     final String logarUrl = "https://localhost:44311/api/Usuarios/loginUsuario";    
 
+    
+    
     var response = await http.post(logarUrl, body: {
       'email' : login,
       'senha' : senha,
@@ -36,13 +38,10 @@ class _LoginState extends State<Login> {
     if(response.body != "null"){
       var responseDecode = json.decode(response.body);
       return responseDecode;
-
-     
     }
     else{
       return null;
     }
-    
     
   }
 
@@ -154,16 +153,22 @@ class _LoginState extends State<Login> {
                               
                               verificarEnderecoExistente(idUsuario).then((value){
                                 if(value == "Direcionar para tela de endereço" ){
-                                  Navigator.pushNamed(context, '/cadastrarEndereco', arguments: dadosUsuario);
+                                  SweetAlert.show(context, subtitle: "Logando...", style: SweetAlertStyle.loading);
+                                  new Future.delayed(new Duration(seconds: 2),(){
+                                    Navigator.pushNamed(context, '/cadastrarEndereco', arguments: dadosUsuario);
+                                  });
                                 }
                                 else{
-                                  Navigator.pushNamed(context, '/navegacao', arguments: dadosUsuario);
+                                  SweetAlert.show(context, subtitle: "Logando...", style: SweetAlertStyle.loading);
+                                  new Future.delayed(new Duration(seconds: 2),(){
+                                    Navigator.pushNamed(context, '/navegacao', arguments: dadosUsuario);
+                                  });
                                 }
                               });
 
                             }
                             else{
-                              SweetAlert.show(context,title: "E-mail ou senha inválido!", style: SweetAlertStyle.error);
+                              SweetAlert.show(context, subtitle: "E-mail ou senha inválido!", style: SweetAlertStyle.error);
                             }
 
                           });

@@ -28,9 +28,12 @@ class _CadastrarState extends State<Cadastrar> {
   var dropdownValue = 'N';
   FocusNode myFocusNode = new FocusNode();
 
+  
 
   Future cadastrarUsuario(var primeiroNome, var sobrenome, var email, var cpf,
       var senha , var confirmaSenha, var sexo, var datadeNascimento) async {
+    
+    final String cadastrarUsuarioUrl = "https://localhost:44311/api/Usuarios/alterarUsuario";  
 
     if(primeiroNome == null || primeiroNome == ""){
       return "Preencha o nome";
@@ -49,7 +52,6 @@ class _CadastrarState extends State<Cadastrar> {
     }
 
      if(sexo == null || sexo == "" || sexo == "N"){
-      SweetAlert.show(context, title: "Preencha o nome", style: SweetAlertStyle.error);
       return "Preencha o sexo";
     }
 
@@ -57,16 +59,12 @@ class _CadastrarState extends State<Cadastrar> {
       return "Preencha a data de nascimento";
     }
 
-    final String cadastrarUsuarioUrl = "https://localhost:44311/api/Usuarios/alterarUsuario";  
-
-
-    carregandoAPI = true;
-    //Ajuda do professor
-    //CircularProgressIndicator(); 
-
     if(senha != confirmaSenha){
       return "Senhas diferentes";
     } 
+
+    carregandoAPI = true;
+    
 
     var response = await http.post(cadastrarUsuarioUrl, body: {
 
@@ -80,6 +78,8 @@ class _CadastrarState extends State<Cadastrar> {
       "DatadeNascimento": datadeNascimento,
   
     });
+
+    
 
     print(response.body);
     
@@ -152,7 +152,7 @@ class _CadastrarState extends State<Cadastrar> {
                 Row(
                   children: [
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.45,
+                      width: MediaQuery.of(context).size.width * 0.44,
                       child: Padding(
                         padding: const EdgeInsets.only(top: 8, right: 8),
                         child: TextField(
@@ -177,7 +177,7 @@ class _CadastrarState extends State<Cadastrar> {
                       ),
                     ),
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.45,
+                      width: MediaQuery.of(context).size.width * 0.44,
                       child: Padding(
                         padding: const EdgeInsets.only(top: 8, right: 8),
                         child: TextField(
@@ -322,7 +322,7 @@ class _CadastrarState extends State<Cadastrar> {
                 Row(
                   children: [
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.45,
+                      width: MediaQuery.of(context).size.width * 0.44,
                       child: Padding(
                         padding: const EdgeInsets.only(top: 8, right: 8),
                         child: TextField(
@@ -347,7 +347,7 @@ class _CadastrarState extends State<Cadastrar> {
                       ),
                     ),
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.45,
+                      width: MediaQuery.of(context).size.width * 0.44,
                       child: Padding(
                         padding: const EdgeInsets.only(top: 8, right: 8),
                         child: TextField(
@@ -390,45 +390,45 @@ class _CadastrarState extends State<Cadastrar> {
                           _cpf.text, _senha.text, _confirmaSenha.text, dropdownValue, _datadeNascimento.text).then((value) {
                           
                           if(value == 0){
-                            SweetAlert.show(context, title: "Usuário cadastrado com sucesso!");
-                            Navigator.pushNamed(context, '/login');
-                          }
-                          else if(value == 2){
-
-                            SweetAlert.show(context,title: "E-mail já cadastrado no sistema!", style: SweetAlertStyle.error);
+                            SweetAlert.show(context, subtitle: "Usuário cadastrado com sucesso!", style: SweetAlertStyle.success);
+                           
+                            Future.delayed(const Duration(seconds: 3),(){
+                              Navigator.pushNamed(context, '/login');
+                            });
                             
                           }
 
                           else if(value == "Senhas diferentes"){
-
-                            SweetAlert.show(context,title: "Senha Inválida!",subtitle: "As senhas são divergentes.", style: SweetAlertStyle.error);
-                            
+                            SweetAlert.show(context, title: "Senha Inválida!",subtitle: "As senhas são divergentes.", style: SweetAlertStyle.error);
                           }
                           else if(value == "Preencha o nome"){
-                            SweetAlert.show(context, title: "Preencha o nome", style: SweetAlertStyle.error);
+                            SweetAlert.show(context, subtitle: "Preencha o nome", style: SweetAlertStyle.error);
                           }
 
                           else if(value == "Preencha o sobrenome"){
-                            SweetAlert.show(context, title: "Preencha o sobrenome", style: SweetAlertStyle.error);
+                            SweetAlert.show(context, subtitle: "Preencha o sobrenome", style: SweetAlertStyle.error);
                           }
 
                           else if(value == "Preencha o e-mail"){
-                            SweetAlert.show(context, title: "Preencha o e-mail", style: SweetAlertStyle.error);
+                            SweetAlert.show(context, subtitle: "Preencha o e-mail", style: SweetAlertStyle.error);
                           }
 
                           else if(value == "Preencha o cpf"){
-                            SweetAlert.show(context, title: "Preencha o CPF", style: SweetAlertStyle.error);
+                            SweetAlert.show(context, subtitle: "Preencha o CPF", style: SweetAlertStyle.error);
                           }
                           
                           else if(value == "Preencha a data de nascimento"){
-                            SweetAlert.show(context, title: "Preencha a data de nascimento", style: SweetAlertStyle.error);
+                            SweetAlert.show(context, subtitle: "Preencha a data de nascimento", style: SweetAlertStyle.error);
                           }
 
-                          else{
-                            SweetAlert.show(context,title: "Erro!",subtitle: "Contate a equipe de suporte.", style: SweetAlertStyle.error);
+                          else if(value == "2"){
+                            SweetAlert.show(context, subtitle: "E-mail já cadastrado no sistema", style: SweetAlertStyle.error);
+                          }
+
+                          else if (value == "1"){
+                            SweetAlert.show(context, subtitle: "Contate a equipe de suporte.", style: SweetAlertStyle.error);
                           }
                         });
-                       
                        
                       },
 

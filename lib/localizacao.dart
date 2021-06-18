@@ -116,7 +116,7 @@ class _LocalizacaoState extends State<Localizacao> {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: MediaQuery.of(context).size.height *0.40,
+                      height: MediaQuery.of(context).size.height *0.35,
                       child: GoogleMap(
                         mapType: MapType.normal,
                         myLocationButtonEnabled: true,
@@ -148,7 +148,7 @@ class _LocalizacaoState extends State<Localizacao> {
                         alignment: Alignment.topCenter,
                         children: [
                           SizedBox(
-                            // height: MediaQuery.of(context).size.height *0.4543,
+                            height: MediaQuery.of(context).size.height *0.65,
                             child: Positioned(
                               top: -50.0,
                               left: -15.0,
@@ -187,6 +187,7 @@ class _LocalizacaoState extends State<Localizacao> {
                                                 label: Text('Adicionar'),
                                                 icon: Icon(Icons.add, color: Colors.white),
                                                 onPressed: () {
+                                                  SweetAlert.show(context, subtitle: "Carregando...", style: SweetAlertStyle.loading);
                                                   dadosUsuario.idEndereco = '';
                                                   Navigator.pushNamed(context, '/cadastrarEndereco', arguments: dadosUsuario);
                                                 },       
@@ -308,7 +309,7 @@ class _LocalizacaoState extends State<Localizacao> {
                                                                     ),
                                                                     onPressed: () async{
                                                                       await deletarEndereco(snapshot.data[index]["Id"]);
-                                                                      SweetAlert.show(context,title: "Endereço deletado com sucesso!", style: SweetAlertStyle.success);
+                                                                      SweetAlert.show(context, subtitle: "Endereço deletado com sucesso!", style: SweetAlertStyle.success);
                                                                       setState(() {});
                                                                       // SweetAlert.show(context,
                                                                       //                 title: "Tem certeza que deseja excluir?",

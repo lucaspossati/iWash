@@ -8,7 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:iWash/login.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:sweetalert/sweetalert.dart';
+import 'package:status_alert/status_alert.dart';
 
 import 'main.dart';
 import 'model/result_cep.dart';
@@ -68,12 +70,41 @@ class _CadastrarEnderecoState extends State<CadastrarEndereco> {
 
   Future cadastrarEndereco(var id, var cep, var logradouro, var numero, var complemento, var bairro, var localidade, var uf, var idUsuario, 
     var pontoReferencia, var titulo) async {
+    
+    final String urlApi = "https://localhost:44311/api/Enderecos/alterarEndereco";    
 
     if(titulo == ""){
       titulo = "Endereço";
     }
+
+    if(cep == ""){
+      return "Erro cep";
+    }
+
+    if(logradouro == ""){
+      return "Erro endereço";
+    }
+
+    if(numero == ""){
+      return "Erro numero";
+    }
+
+    if(complemento == ""){
+      return "Erro complemento";
+    }
+
+    if(bairro == ""){
+      return "Erro bairro";
+    }
+
+    if(localidade == ""){
+      return "Erro cidade";
+    }
+
+    if(uf == ""){
+      return "Erro estado";
+    }
     
-    final String urlApi = "https://localhost:44311/api/Enderecos/alterarEndereco";    
     
     http.Response response;
     response = await http.post(urlApi, body: {
@@ -91,7 +122,7 @@ class _CadastrarEnderecoState extends State<CadastrarEndereco> {
     });
     
     
-    if(response.statusCode == 200){
+    if(response.body == "0"){
       var resposta = json.decode(response.body);
       return resposta;
      }
@@ -188,7 +219,6 @@ class _CadastrarEnderecoState extends State<CadastrarEndereco> {
               ),
               SingleChildScrollView(
                 child: Container(
-                  
                   child: Column(
                     children: [
                       Stack(
@@ -609,14 +639,47 @@ class _CadastrarEnderecoState extends State<CadastrarEndereco> {
                                                   await cadastrarEndereco(dadosUsuario.idEndereco, _cep.text, _logradouro.text, _numero.text, _complemento.text,
                                                    _bairro.text, _localidade.text, _uf.text, dadosUsuario.idUsuarioLogado, _pontoReferencia.text, titulo).then((value) {
                                                     
-                                                      if(value != null){
+                                                      if(value == 0){
+                                                        var alertStyle = AlertStyle(animationDuration: Duration(milliseconds: 2000), animationType: AnimationType.fromTop, isCloseButton: false,);
 
-                                                        SweetAlert.show(context,title: "Endereço cadastrado com sucesso!", style: SweetAlertStyle.success);
-                                                        Navigator.pushNamed(context, '/navegacao', arguments: dadosUsuario);
+                                                        Alert(context: context, style: alertStyle, type: AlertType.success, title: "Sucesso!", desc: "Endereço cadastrado").show();
+                                                        Future.delayed(const Duration(seconds: 2),(){
+                                                           Navigator.pushNamed(context, '/navegacao', arguments: dadosUsuario);
+                                                        });
 
                                                       }
+
+                                                      else if(value == "Erro cep"){
+                                                        Alert(context: context, type: AlertType.error, title: "Erro!", desc: "Preencha o CEP").show();
+                                                      }
+
+                                                      else if(value == "Erro endereço"){
+                                                        Alert(context: context, type: AlertType.error, title: "Erro!", desc: "Preencha o endereço").show();
+                                                      }
+
+                                                      else if(value == "Erro numero"){
+                                                        Alert(context: context, type: AlertType.error, title: "Erro!", desc: "Preencha o número").show();
+                                                        
+                                                      }
+
+                                                      else if(value == "Erro complemento"){
+                                                        Alert(context: context, type: AlertType.error, title: "Erro!", desc: "Preencha o complemento").show();
+                                                      }
+
+                                                      else if(value == "Erro bairro"){
+                                                        Alert(context: context, type: AlertType.error, title: "Erro!", desc: "Preencha o bairro").show();
+                                                      }
+
+                                                      else if(value == "Erro cidade"){
+                                                        Alert(context: context, type: AlertType.error, title: "Erro!", desc: "Preencha a cidade").show();
+                                                      }
+
+                                                      else if(value == "Erro estado"){
+                                                        Alert(context: context, type: AlertType.error, title: "Erro!", desc: "Preencha o estado").show();
+                                                      }
+
                                                       else{
-                                                        SweetAlert.show(context,title: "Algo deu errado!", style: SweetAlertStyle.error);
+                                                        Alert(context: context, type: AlertType.error, title: "Erro!", desc: "Contate a equipe de suporte").show();
                                                       }
 
                                                     

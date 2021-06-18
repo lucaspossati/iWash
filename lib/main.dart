@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iWash/lojaCard.dart';
 import 'package:iWash/pesquisar.dart';
 import 'package:iWash/sobre.dart';
+import 'package:sweetalert/sweetalert.dart';
 import 'cadastrar.dart';
 import 'cadastrarEndereco.dart';
 import 'esqueceSenha.dart';
@@ -130,6 +131,7 @@ class _NavBarState extends State<NavBar> {
               leading: Icon(Icons.streetview),
               title: Text('Endereços'),
               onTap: () {
+                SweetAlert.show(context, subtitle: "Carregando...", style: SweetAlertStyle.loading);
                 Navigator.pushNamed(
                   context, '/localizacao', arguments: dadosUsuario
                   
@@ -144,7 +146,8 @@ class _NavBarState extends State<NavBar> {
               leading: Icon(Icons.logout),
               title: Text('Sair'),
               onTap: () {
-               Navigator.push(
+                SweetAlert.show(context, subtitle: "Carregando...", style: SweetAlertStyle.loading);
+                Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => Login(),
