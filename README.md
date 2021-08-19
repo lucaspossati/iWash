@@ -29,7 +29,7 @@
 ## Tela de Cadastro de Endereços
 #### Essa é a tela que é exibida para o usuário pela primeira vez que ele acessa o aplicativo, pois será necessário para exibir as empresas de lavagens automotiva mais próximas do seu endereço.
 <p align="center">
-  <img src="https://i.ibb.co/0DCf98L/cadastro-sucesso.png" width="300">
+  <img src="https://i.ibb.co/9gg6JV5/Whats-App-Image-2021-08-18-at-23-59-28.jpg" width="300">
 <p>
 
 
