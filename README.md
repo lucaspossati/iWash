@@ -36,7 +36,7 @@
 ## Home
 #### Após o usuário se cadastrar, e cadastrar o seu endereço, ele é direcionado para a tela principal do aplicativo.
 <p align="center">
-  <img src="https://i.ibb.co/9gg6JV5/Whats-App-Image-2021-08-18-at-23-59-28.jpg" width="300">
+  <img src="https://i.ibb.co/FJCN8tP/home.png" width="300">
 <p>
 
 #### Para consultar o endereço cadastrado, basta clicar no menu e ir em endereços, como podemos ver na imagem abaixo.
