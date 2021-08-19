@@ -7,10 +7,7 @@
 #### Para rodar o projeto local, basta clonar o Back-End, que é uma API REST desenvolvida em c#, utilizando o entity framework:
 ###### https://github.com/lucaspossati/iWash---BackEnd
 
-#### Para rodar o projeto local, basta clonar o Back-End, que é uma API REST desenvolvida em c#, utilizando o entity framework:
-###### https://github.com/lucaspossati/iWash---BackEnd
-
-#### Após ter o back-end na sua máquina, basta acessar a pasta que contém o banco de dados e restaurar o banco na sua máquina local:
+#### Após ter o Back-End na sua máquina, basta acessar a pasta que contém o banco de dados e restaurar o banco na sua máquina local:
 ###### https://github.com/lucaspossati/iWash---BackEnd/tree/master/database
 
 
