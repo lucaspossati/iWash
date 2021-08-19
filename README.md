@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# iWash
-=======
 # iWash - Aplicação Flutter
 
 ##Login
