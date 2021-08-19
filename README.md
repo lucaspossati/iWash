@@ -1,6 +1,4 @@
-<p align="center">
-  **iWash - Aplicação Flutter**
-<p>
+# iWash - Aplicação Flutter**
 
 
 ## Login
@@ -19,19 +17,26 @@
 
 ## Tela de Cadastro de Endereços
 #### Essa é a tela que é exibida para o usuário pela primeira vez que ele acessa o aplicativo, pois será necessário para exibir as empresas de lavagens automotiva mais próximas do seu endereço.
-![alt text](https://i.ibb.co/0DCf98L/cadastro-sucesso.png)
+<p align="center">
+  <img src="https://i.ibb.co/0DCf98L/cadastro-sucesso.png" width="300">
+<p>
 
 
 ## Home
 #### Após o usuário se cadastrar, e cadastrar o seu endereço, ele é direcionado para a tela principal do aplicativo.
-![alt text](https://i.ibb.co/9gg6JV5/Whats-App-Image-2021-08-18-at-23-59-28.jpg)
+<p align="center">
+  <img src="https://i.ibb.co/9gg6JV5/Whats-App-Image-2021-08-18-at-23-59-28.jpg" width="300">
+<p>
 #### Para consultar o endereço cadastrado, basta clicar no menu e ir em endereços, como podemos ver na imagem abaixo.
-![alt text](https://i.ibb.co/cJFknSD/menu.png) ![alt text](https://i.ibb.co/N3R6mhd/enderecos.png)
+<p align="center">
+  <img src="https://i.ibb.co/cJFknSD/menu.png" width="300">
+  <img src="https://i.ibb.co/N3R6mhd/enderecos.png" width="300">
+<p>
 #### A tela acima de endereços e cadastro de endereços, é exibido o mapa do Google no container acima, porém ele não da suporte para emular no Google Chrome. Na tela de cadastro de endereços, que foi postada anteriormente, é possível ver o mapa.
 
 
 ## Tela de Cadastro de Endereços
 #### Essa é a tela que é exibida para o usuário pela primeira vez que ele acessa o aplicativo, pois será necessário para exibir as empresas de lavagens automotiva mais próximas do seu endereço.
-![alt text](https://i.ibb.co/0DCf98L/cadastro-sucesso.png)
-
-
+<p align="center">
+  <img src="https://i.ibb.co/0DCf98L/cadastro-sucesso.png" width="300">
+<p>
