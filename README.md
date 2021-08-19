@@ -1,4 +1,9 @@
-# iWash - Aplicação Flutter**
+# iWash
+## Aplicativo para solicitar uma lavagem no seu automóvel, onde você estiver
+
+
+#### Desde o começo eu desejava melhorar as minhas habilidades com a linguagem Dart e desenvolver a minha própria API, que seria um grande portfólio para a minha carreira de desenvolvedor. Desenvolvi a API utilizando .NET, com o entity framework, para realizar autenticação de login, comunicação com o banco de dados no SQL server e realizar o CRUD da aplicação. Não sei se esse foi o melhor caminho, mas serviu para aprender muito sobre APIs e Flutter.
+
 
 
 ## Login
