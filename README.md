@@ -4,6 +4,15 @@
 
 #### Desde o começo eu desejava melhorar as minhas habilidades com a linguagem Dart e desenvolver a minha própria API, que seria um grande portfólio para a minha carreira de desenvolvedor. Desenvolvi a API utilizando .NET, com o entity framework, para realizar autenticação de login, comunicação com o banco de dados no SQL server e realizar o CRUD da aplicação. Não sei se esse foi o melhor caminho, mas serviu para aprender muito sobre APIs e Flutter.
 
+#### Para rodar o projeto local, basta clonar o Back-End, que é uma API REST desenvolvida em c#, utilizando o entity framework:
+###### https://github.com/lucaspossati/iWash---BackEnd
+
+#### Para rodar o projeto local, basta clonar o Back-End, que é uma API REST desenvolvida em c#, utilizando o entity framework:
+###### https://github.com/lucaspossati/iWash---BackEnd
+
+#### Após ter o back-end na sua máquina, basta acessar a pasta que contém o banco de dados e restaurar o banco na sua máquina local:
+###### https://github.com/lucaspossati/iWash---BackEnd/tree/master/database
+
 
 
 ## Login
