@@ -1,5 +1,5 @@
-<p align="center" style="font-size= 40; ">
-  iWash - Aplicação Flutter
+<p align="center">
+  **iWash - Aplicação Flutter**
 <p>
 
 
