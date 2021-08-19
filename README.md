@@ -48,3 +48,9 @@
 <p align="center">
   <img src="https://i.ibb.co/0DCf98L/cadastro-sucesso.png" width="300">
 <p>
+  
+  
+
+# O aplicativo ainda será concluído, esse foi apenas o primeiro release.
+  
+##### "Quando chover, busque pelo arco-íris. Quando escurecer, busque pelas estrelas."
