@@ -5,9 +5,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iWash/home.dart';
+import 'package:iWash/src/pages/telas-internas/home.dart';
 import 'package:http/http.dart' as http;
-import 'package:iWash/model/usuarios.dart';
 import 'package:sweetalert/sweetalert.dart';
 
 import 'cadastrar.dart';

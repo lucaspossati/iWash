@@ -1,24 +1,22 @@
 // import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iWash/lojaCard.dart';
-import 'package:iWash/pesquisar.dart';
-import 'package:iWash/sobre.dart';
+import 'package:iWash/src/pages/telas-acesso/cadastrar.dart';
+import 'package:iWash/src/pages/telas-acesso/esqueceSenha.dart';
+import 'package:iWash/src/pages/telas-acesso/login.dart';
+import 'package:iWash/src/pages/telas-internas/cadastrarEndereco.dart';
+import 'package:iWash/src/pages/telas-internas/home.dart';
+import 'package:iWash/src/pages/telas-internas/pesquisar.dart';
+import 'package:iWash/src/pages/telas-internas/sobre.dart';
 import 'package:sweetalert/sweetalert.dart';
-import 'cadastrar.dart';
-import 'cadastrarEndereco.dart';
-import 'esqueceSenha.dart';
-import 'home.dart';
-import 'localizacao.dart';
-import 'login.dart';
-import 'lojas.dart';
+import 'src/pages/telas-internas/localizacao.dart';
 
 void main() {
 
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     
-    initialRoute: '/login',
+    initialRoute: '/cadastrarEndereco',
     routes: {
       '/login': (context) => Login(),
       '/esqueceSenha': (context) => EsqueceSenha(),

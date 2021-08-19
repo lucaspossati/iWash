@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:iWash/cadastrar.dart';
+import 'package:iWash/src/pages/telas-acesso/cadastrar.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iWash/src/view/lojaCard.dart';
 
-import 'login.dart';
-import 'lojaCard.dart';
+import '../telas-acesso/login.dart';
 import 'lojas.dart';
 
 class Home extends StatefulWidget {

@@ -7,13 +7,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
-import 'package:iWash/login.dart';
+import 'package:iWash/src/pages/telas-acesso/login.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:sweetalert/sweetalert.dart';
 import 'package:status_alert/status_alert.dart';
 
-import 'main.dart';
-import 'model/result_cep.dart';
+import '../../../main.dart';
 
 class CadastrarEndereco extends StatefulWidget {
   @override
@@ -155,29 +154,29 @@ class _CadastrarEnderecoState extends State<CadastrarEndereco> {
   Widget build(BuildContext context) {
 
     
-    final UsuarioLogado dadosUsuario = ModalRoute.of(context).settings.arguments;
+    // final UsuarioLogado dadosUsuario = ModalRoute.of(context).settings.arguments;
+    
+    // if(dadosUsuario.idEndereco != ''){
+    //   getEnderecoUsuario(dadosUsuario.idEndereco.toString()).then((value) {
+    //     _cep.text = value['CEP'];
+    //     _logradouro.text = value['Rua'];
+    //     _numero.text = value['Numero'].toString();
+    //     _complemento.text = value['Complemento'];
+    //     _bairro.text = value['Bairro'];
+    //     _localidade.text = value['Cidade'];
+    //     _uf.text = value['Estado'];
+    //     _pontoReferencia.text = value['PontoReferencia'];
 
-    if(dadosUsuario.idEndereco != ''){
-      getEnderecoUsuario(dadosUsuario.idEndereco.toString()).then((value) {
-        _cep.text = value['CEP'];
-        _logradouro.text = value['Rua'];
-        _numero.text = value['Numero'].toString();
-        _complemento.text = value['Complemento'];
-        _bairro.text = value['Bairro'];
-        _localidade.text = value['Cidade'];
-        _uf.text = value['Estado'];
-        _pontoReferencia.text = value['PontoReferencia'];
-
-        if(value['Titulo'] == "Trabalho"){
-          checkedTrabalho = true;
-          checkedCasa = false;
-        }
-        else{
-          checkedCasa = true;
-          checkedTrabalho = false;
-        }
-      });
-    }
+    //     if(value['Titulo'] == "Trabalho"){
+    //       checkedTrabalho = true;
+    //       checkedCasa = false;
+    //     }
+    //     else{
+    //       checkedCasa = true;
+    //       checkedTrabalho = false;
+    //     }
+    //   });
+    // }
 
     return Scaffold(
       appBar: AppBar(
@@ -309,7 +308,6 @@ class _CadastrarEnderecoState extends State<CadastrarEndereco> {
                                                       _bairro.text = value["bairro"];
                                                       _localidade.text = value["localidade"];
                                                       _uf.text = value["uf"];
-                                                      print(dadosUsuario.idEndereco);
                                                       
                                                     });},
 
@@ -636,15 +634,15 @@ class _CadastrarEnderecoState extends State<CadastrarEndereco> {
                                                 icon: Icon(Icons.save, color: Colors.white),
                                                 
                                                 onPressed: () async{
-                                                  await cadastrarEndereco(dadosUsuario.idEndereco, _cep.text, _logradouro.text, _numero.text, _complemento.text,
-                                                   _bairro.text, _localidade.text, _uf.text, dadosUsuario.idUsuarioLogado, _pontoReferencia.text, titulo).then((value) {
+                                                  await cadastrarEndereco(1, _cep.text, _logradouro.text, _numero.text, _complemento.text,
+                                                   _bairro.text, _localidade.text, _uf.text, 1, _pontoReferencia.text, titulo).then((value) {
                                                     
                                                       if(value == 0){
                                                         var alertStyle = AlertStyle(animationDuration: Duration(milliseconds: 2000), animationType: AnimationType.fromTop, isCloseButton: false,);
 
                                                         Alert(context: context, style: alertStyle, type: AlertType.success, title: "Sucesso!", desc: "Endereço cadastrado").show();
                                                         Future.delayed(const Duration(seconds: 2),(){
-                                                           Navigator.pushNamed(context, '/navegacao', arguments: dadosUsuario);
+                                                           Navigator.pushNamed(context, '/navegacao', arguments: 1);
                                                         });
 
                                                       }

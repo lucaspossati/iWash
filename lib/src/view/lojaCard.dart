@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:iWash/lojas.dart';
+import 'package:iWash/src/pages/telas-internas/lojas.dart';
 
 class LojaCard extends StatelessWidget {
   const LojaCard({Key key, this.lojas}) : super(key: key);

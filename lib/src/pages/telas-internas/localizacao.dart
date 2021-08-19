@@ -5,12 +5,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
-import 'package:iWash/login.dart';
-import 'package:iWash/model/enderecos.dart';
+import 'package:iWash/src/model/enderecos.dart';
+import 'package:iWash/src/pages/telas-acesso/login.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:sweetalert/sweetalert.dart';
 
-import 'main.dart';
+import '../../../main.dart';
 
 class Localizacao extends StatefulWidget {
   @override
