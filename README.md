@@ -2,13 +2,17 @@
 
 ## Login
 #### A tela de login se comunica com a API e valida se o usuário, com e-mail e senha, está cadastrado no sistema.
-<img align="center" src="https://i.ibb.co/y5scjTH/login.png" width="300">
+<p align="center">
+  <img src="https://i.ibb.co/y5scjTH/login.png" width="300">
+<p>
 
-
+ 
 ## Tela de Cadastro de Usuários
 #### Nessa tela possui algumas validações, como por exemplo: se o e-mail já está cadastrado no sistema, se as senhas estão iguais, se todos os campos estão preenchidos e outras validações para enviar o objeto para a API com todos os campos válidos.
-<img src="https://i.ibb.co/tYwfhKX/cadastro.png" width="300"> <img src="https://i.ibb.co/0DCf98L/cadastro-sucesso.png" width="300">
-
+<p align="center">
+  <img src="https://i.ibb.co/tYwfhKX/cadastro.png" width="300"> <img src="https://i.ibb.co/0DCf98L/cadastro-sucesso.png" width="300">
+<p>
+  
 
 ## Tela de Cadastro de Endereços
 #### Essa é a tela que é exibida para o usuário pela primeira vez que ele acessa o aplicativo, pois será necessário para exibir as empresas de lavagens automotiva mais próximas do seu endereço.
