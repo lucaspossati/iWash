@@ -2,7 +2,7 @@
 
 ## Login
 #### A tela de login se comunica com a API e valida se o usuário, com e-mail e senha, está cadastrado no sistema.
-![](https://i.ibb.co/y5scjTH/login.png | width=100)
+<img src="https://i.ibb.co/y5scjTH/login.png" width="200">
 
 
 ## Tela de Cadastro de Usuários
