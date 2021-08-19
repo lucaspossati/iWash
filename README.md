@@ -2,7 +2,7 @@
 # iWash
 =======
 # iWash - Aplicação Flutter
->>>>>>> 4df261e6012c715d099268f6efb02f773279f24b
 
-
-![alt text](https://uploaddeimagens.com.br/images/003/208/867/original/app.png?1619122761)
+##Login
+###A tela de login se comunica com a API e valida se o usuário, com e-mail e senha, está cadastrado no sistema.
+![alt text](https://ibb.co/zbfTvcq)
