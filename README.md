@@ -32,11 +32,14 @@
 <p align="center">
   <img src="https://i.ibb.co/9gg6JV5/Whats-App-Image-2021-08-18-at-23-59-28.jpg" width="300">
 <p>
+
 #### Para consultar o endereço cadastrado, basta clicar no menu e ir em endereços, como podemos ver na imagem abaixo.
+  
 <p align="center">
   <img src="https://i.ibb.co/cJFknSD/menu.png" width="300">
   <img src="https://i.ibb.co/N3R6mhd/enderecos.png" width="300">
 <p>
+ 
 #### A tela acima de endereços e cadastro de endereços, é exibido o mapa do Google no container acima, porém ele não da suporte para emular no Google Chrome. Na tela de cadastro de endereços, que foi postada anteriormente, é possível ver o mapa.
 
 
